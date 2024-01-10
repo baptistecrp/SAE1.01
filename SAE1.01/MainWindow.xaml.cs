@@ -32,8 +32,10 @@ namespace SAE1._01
         // Liste image lettre
         private ImageBrush[] lettreImg = new ImageBrush[26];
         // Alphabet
-        private String[] alpha = new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }
-;
+        private String[] alpha = new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+        // liste élément à supprimer
+        private List<Rectangle> elementASuppr = new List<Rectangle>() ;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -52,20 +54,31 @@ namespace SAE1._01
             // Creation Ennemi
             CreationEnnemi();
         }
-        private void CanvasKeyIsDown(object sender, KeyEventArgs e)
-        { }
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
-        { }
+        { 
+            Console.WriteLine(e.Key);
+            foreach (var y in myCanvas.Children.OfType<Rectangle>())
+            {
+                if ((string)y.Tag == "ennemi" + e.Key)
+                {
+                    elementASuppr.Add(y);
+                }
+                
+            }
+        }
         private void CreationEnnemi()
         {
             Random random = new Random();
             // Creation nouvel ennemi
+            Ennemi ennemi = new Ennemi("A", Ennemi.TYPE_NORMAL);
+            int nbLettre = Array.IndexOf(alpha, ennemi.Lettre);
+            Console.WriteLine(nbLettre);
             Rectangle nouvelEnenemi = new Rectangle
             {
-                Tag = "ennemi",
+                Tag = "ennemi"+ennemi.Lettre,
                 Height = 45,
                 Width = 45,
-                Fill = lettreImg[random.Next(0,26)],
+                Fill = lettreImg[nbLettre],
             };
             // Placement aléatoire
             Canvas.SetTop(nouvelEnenemi, 0);
@@ -106,6 +119,10 @@ namespace SAE1._01
             {
                 CreationEnnemi();
                 apparitionNouvelEnnemi = false;
+            }
+            foreach (Rectangle y in elementASuppr)
+            {
+                myCanvas.Children.Remove(y);
             }
         }
     }
