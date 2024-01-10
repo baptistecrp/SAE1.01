@@ -28,7 +28,12 @@ namespace SAE1._01
         // Skin ennemi
         private ImageBrush ennemiSkin = new ImageBrush();
         // Apparation Nouvel Ennemi
-        private bool apparitonNouvelEnnemi = false;
+        private bool apparitionNouvelEnnemi = false;
+        // Liste image lettre
+        private ImageBrush[] lettreImg = new ImageBrush[26];
+        // Alphabet
+        private String[] alpha = new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }
+;
         public MainWindow()
         {
             InitializeComponent();
@@ -38,8 +43,14 @@ namespace SAE1._01
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             // Lancement timer
             dispatcherTimer.Start();
+            // Creation de la liste des images de lettre
+            for (int i = 0; i < alpha.Length; i++)
+            {
+                lettreImg[i] = new ImageBrush();
+                lettreImg[i].ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/" + alpha[i] + ".png"));
+            }
+            // Creation Ennemi
             CreationEnnemi();
-            ennemiSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/A.png"));
         }
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
         { }
@@ -54,7 +65,7 @@ namespace SAE1._01
                 Tag = "ennemi",
                 Height = 45,
                 Width = 45,
-                Fill = ennemiSkin,
+                Fill = lettreImg[random.Next(0,26)],
             };
             // Placement aléatoire
             Canvas.SetTop(nouvelEnenemi, 0);
@@ -85,16 +96,16 @@ namespace SAE1._01
                     // Detectiion hauteur pour apparation nouvel ennemi
                     if (Canvas.GetTop(y) >= random.Next(40, 130))
                     {
-                        apparitonNouvelEnnemi = true;
+                        apparitionNouvelEnnemi = true;
                     }
                 }
             }
 
             // Test pour faire apparaitre nouvel ennemi aléatoirement si possible
-            if (apparitonNouvelEnnemi && random.Next(1,30) == 3)
+            if (apparitionNouvelEnnemi && random.Next(1,30) == 3)
             {
                 CreationEnnemi();
-                apparitonNouvelEnnemi = false;
+                apparitionNouvelEnnemi = false;
             }
         }
     }
