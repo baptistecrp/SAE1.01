@@ -30,7 +30,7 @@ namespace SAE1._01
         // Skin ennemi
         private ImageBrush ennemiSkin = new ImageBrush();
         // Apparation Nouvel Ennemi
-        private bool apparitionNouvelEnnemi = false;
+        private bool apparitionNouvelEnnemi = true;
         // Liste image lettre
         private ImageBrush[] lettreImg = new ImageBrush[26];
         // Alphabet
@@ -105,13 +105,7 @@ namespace SAE1._01
                 {
 
                     // Deplacement
-                    DeplacementEnnemi(y);
-
-                    // Detectiion hauteur pour apparation nouvel ennemi
-                    if (Canvas.GetTop(y) >= random.Next(40, 130))
-                    {
-                        apparitionNouvelEnnemi = true;
-                    }
+                    DeplacementEnnemi(y);                    
                 }
             }
 
@@ -119,7 +113,6 @@ namespace SAE1._01
             if (apparitionNouvelEnnemi && random.Next(1,30) == 3)
             {
                 CreationEnnemi();
-                apparitionNouvelEnnemi = false;
             }
             foreach (Rectangle y in elementASuppr)
             {
