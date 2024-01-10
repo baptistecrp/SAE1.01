@@ -21,10 +21,16 @@ namespace SAE1._01
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Timer
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        // Vitesse ennemi
         private double vitesseEnnemi = 0.5;
+        // Skin ennemi
         private ImageBrush ennemiSkin = new ImageBrush();
+        // Apparation Nouvel Ennemi
         private bool apparitonNouvelEnnemi = false;
+        // Nombre ennemi sur la canvas
+        private int nombreEnnemi = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -68,25 +74,31 @@ namespace SAE1._01
         {
             Random random = new Random();
 
+            // Remise à 0 du compteur
+            nombreEnnemi = 0;
+
             // Parcourt de tous les rectangles du canvas
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
                 // Si le rectangle est un ennemi
                 if (y is Rectangle && (string)y.Tag == "ennemi")
                 {
+                    // Ajout d'un ennemi au compteur
+                    nombreEnnemi += 1;
+
                     // Deplacement
                     DeplacementEnnemi(y);
 
                     // Detectiion hauteur pour apparation nouvel ennemi
-                    if (Canvas.GetTop(y) >= random.Next(80, 130))
+                    if (Canvas.GetTop(y) >= random.Next(40, 130))
                     {
                         apparitonNouvelEnnemi = true;
                     }
                 }
             }
 
-            // Test pour faire apparaitre nouvel ennemi
-            if (apparitonNouvelEnnemi)
+            // Test pour faire apparaitre nouvel ennemi aléatoirement si possible
+            if (apparitonNouvelEnnemi && nombreEnnemi <= 4 && random.Next(1,5) == 3)
             {
                 CreationEnnemi();
                 apparitonNouvelEnnemi = false;
