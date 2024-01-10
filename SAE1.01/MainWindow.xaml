@@ -33,6 +33,7 @@
             Height="65"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Fill="White" />
+            Fill="White"
+            Tag="joueur1" />
     </Canvas>
 </Window>

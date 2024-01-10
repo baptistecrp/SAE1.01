@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,7 @@ namespace SAE1._01
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Regex regexTagEnnemi = new Regex("^ennemi.$");
         // Timer
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         // Vitesse ennemi
@@ -70,9 +72,8 @@ namespace SAE1._01
         {
             Random random = new Random();
             // Creation nouvel ennemi
-            Ennemi ennemi = new Ennemi("A", Ennemi.TYPE_NORMAL);
+            Ennemi ennemi = new Ennemi(alpha[random.Next(0,26)], Ennemi.TYPE_NORMAL);
             int nbLettre = Array.IndexOf(alpha, ennemi.Lettre);
-            Console.WriteLine(nbLettre);
             Rectangle nouvelEnenemi = new Rectangle
             {
                 Tag = "ennemi"+ennemi.Lettre,
@@ -100,7 +101,7 @@ namespace SAE1._01
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
                 // Si le rectangle est un ennemi
-                if (y is Rectangle && (string)y.Tag == "ennemi")
+                if (y is Rectangle && regexTagEnnemi.IsMatch((string)y.Tag))
                 {
 
                     // Deplacement
