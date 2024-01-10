@@ -23,6 +23,7 @@ namespace SAE1._01
     {
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private double vitesseEnnemi = 2;
+        private ImageBrush ennemiSkin = new ImageBrush();
         public MainWindow()
         {
             InitializeComponent();
@@ -33,6 +34,7 @@ namespace SAE1._01
             // Lancement timer
             dispatcherTimer.Start();
             CreationEnnemi();
+            ennemiSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/AV2.png"));
         }
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
         { }
@@ -47,7 +49,7 @@ namespace SAE1._01
                 Tag = "ennemi",
                 Height = 45,
                 Width = 45,
-                Fill = new SolidColorBrush(System.Windows.Media.Colors.Red),
+                Fill = ennemiSkin,
             };
             // Placement aléatoire
             Canvas.SetTop(nouvelEnenemi, 0);
