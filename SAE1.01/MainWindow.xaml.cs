@@ -29,8 +29,6 @@ namespace SAE1._01
         private ImageBrush ennemiSkin = new ImageBrush();
         // Apparation Nouvel Ennemi
         private bool apparitonNouvelEnnemi = false;
-        // Nombre ennemi sur la canvas
-        private int nombreEnnemi = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -74,17 +72,12 @@ namespace SAE1._01
         {
             Random random = new Random();
 
-            // Remise à 0 du compteur
-            nombreEnnemi = 0;
-
             // Parcourt de tous les rectangles du canvas
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
                 // Si le rectangle est un ennemi
                 if (y is Rectangle && (string)y.Tag == "ennemi")
                 {
-                    // Ajout d'un ennemi au compteur
-                    nombreEnnemi += 1;
 
                     // Deplacement
                     DeplacementEnnemi(y);
@@ -98,7 +91,7 @@ namespace SAE1._01
             }
 
             // Test pour faire apparaitre nouvel ennemi aléatoirement si possible
-            if (apparitonNouvelEnnemi && nombreEnnemi <= 4 && random.Next(1,5) == 3)
+            if (apparitonNouvelEnnemi && random.Next(1,30) == 3)
             {
                 CreationEnnemi();
                 apparitonNouvelEnnemi = false;
