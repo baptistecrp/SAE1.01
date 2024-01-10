@@ -20,6 +20,7 @@
         Focusable="True">
         <Label
             Name="enemiesLeft"
+            Panel.ZIndex="1"
             FontSize="16"
             FontWeight="ExtraBold"
             Foreground="White">

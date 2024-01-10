@@ -31,14 +31,28 @@ namespace SAE1._01
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             // Lancement timer
             dispatcherTimer.Start();
+            CreationEnnemi();
         }
-        private void Canvas_KeyIsDown(object sender, KeyEventArgs e)
+        private void CanvasKeyIsDown(object sender, KeyEventArgs e)
         { }
-        private void Canvas_KeyIsUp(object sender, KeyEventArgs e)
+        private void CanvasKeyIsUp(object sender, KeyEventArgs e)
         { }
-        private void CreationEnnemi(int limit)
-        { }
+        private void CreationEnnemi()
+        {
+            Random random = new Random();
+            Rectangle nouvelEnenemi = new Rectangle
+            {
+                Tag = "ennemi",
+                Height = 45,
+                Width = 45,
+                Fill = new SolidColorBrush(System.Windows.Media.Colors.Red),
+        };
+            Canvas.SetTop(nouvelEnenemi, 0);
+            Canvas.SetLeft(nouvelEnenemi, random.Next(30, (int)Application.Current.MainWindow.Width-29));
+            myCanvas.Children.Add(nouvelEnenemi);
+        }
         private void Jeu(object sender, EventArgs e)
-        { }
+        {
+        }
     }
 }
