@@ -9,6 +9,8 @@
     Width="800"
     Height="450"
     FocusManager.FocusedElement="{Binding ElementName=myCanvas}"
+    KeyDown="CanvasKeyIsDown"
+    KeyUp="CanvasKeyIsUp"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">

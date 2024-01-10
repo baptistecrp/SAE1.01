@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace SAE1._01
 {
@@ -20,9 +21,24 @@ namespace SAE1._01
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         public MainWindow()
         {
             InitializeComponent();
+            // Configuration du timer
+            dispatcherTimer.Tick += Jeu;
+            // Rafraichissment chaque 16ms
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
+            // Lancement timer
+            dispatcherTimer.Start();
         }
+        private void Canvas_KeyIsDown(object sender, KeyEventArgs e)
+        { }
+        private void Canvas_KeyIsUp(object sender, KeyEventArgs e)
+        { }
+        private void CreationEnnemi(int limit)
+        { }
+        private void Jeu(object sender, EventArgs e)
+        { }
     }
 }
