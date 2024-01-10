@@ -22,6 +22,7 @@ namespace SAE1._01
     public partial class MainWindow : Window
     {
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        private double vitesseEnnemi = 2;
         public MainWindow()
         {
             InitializeComponent();
@@ -40,19 +41,38 @@ namespace SAE1._01
         private void CreationEnnemi()
         {
             Random random = new Random();
+            // Creation nouvel ennemi
             Rectangle nouvelEnenemi = new Rectangle
             {
                 Tag = "ennemi",
                 Height = 45,
                 Width = 45,
                 Fill = new SolidColorBrush(System.Windows.Media.Colors.Red),
-        };
+            };
+            // Placement aléatoire
             Canvas.SetTop(nouvelEnenemi, 0);
             Canvas.SetLeft(nouvelEnenemi, random.Next(30, (int)Application.Current.MainWindow.Width-29));
             myCanvas.Children.Add(nouvelEnenemi);
+            // Modification vitesse pour accélérer
+            vitesseEnnemi += 0.1;
+        }
+        private void DeplacementEnnemi(Rectangle ennemi)
+        {
+            // Deplacement vers le bas
+            Canvas.SetTop(ennemi, Canvas.GetTop(ennemi) + vitesseEnnemi);
         }
         private void Jeu(object sender, EventArgs e)
         {
+            // Parcourt de tous les rectangles du canvas
+            foreach (var y in myCanvas.Children.OfType<Rectangle>())
+            {
+                // Si le rectangle est un ennemi
+                if (y is Rectangle && (string)y.Tag == "ennemi")
+                {
+                    // Deplacement
+                    DeplacementEnnemi(y);
+                }
+            }
         }
     }
 }
