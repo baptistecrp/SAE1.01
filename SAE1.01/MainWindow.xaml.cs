@@ -86,17 +86,26 @@ namespace SAE1._01
                 Width = 45,
                 Fill = lettreImg[nbLettre],
             };
-            // Placement aléatoire
-            Canvas.SetTop(nouvelEnenemi, 0);
-            Canvas.SetLeft(nouvelEnenemi, random.Next(30, (int)Application.Current.MainWindow.Width-(29+(int)nouvelEnenemi.Width)));
+            // Placement aléatoire entre gauche et droite
+            Canvas.SetTop(nouvelEnenemi, Canvas.GetTop(joueur1));
+            Canvas.SetLeft(nouvelEnenemi, random.Next(0, 2)*(int)Application.Current.MainWindow.Width);
             myCanvas.Children.Add(nouvelEnenemi);
             // Modification vitesse pour accélérer
             vitesseEnnemi += 0.1;
         }
         private void DeplacementEnnemi(Rectangle ennemi)
         {
-            // Deplacement vers le bas 
-            Canvas.SetTop(ennemi, Canvas.GetTop(ennemi) + vitesseEnnemi);
+            // Deplacement vers la droite des ennemis à gauche
+            if (Canvas.GetLeft(ennemi) < Canvas.GetLeft(joueur1))
+            {
+                Canvas.SetLeft(ennemi, Canvas.GetLeft(ennemi) + vitesseEnnemi);
+            }
+            // Deplacement vers la gauche des ennemis à droite
+            if (Canvas.GetLeft(ennemi) > Canvas.GetLeft(joueur1)+joueur1.Width)
+            {
+                Canvas.SetLeft(ennemi, Canvas.GetLeft(ennemi) - vitesseEnnemi);
+            }
+
         }
         private void Jeu(object sender, EventArgs e)
         {
@@ -105,6 +114,9 @@ namespace SAE1._01
             // Parcourt de tous les rectangles du canvas
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
+                Rect ennemi = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
+                Rect joueur = new Rect(Canvas.GetLeft(joueur1), Canvas.GetTop(joueur1), joueur1.Width, joueur1.Height);
+
                 // Si le rectangle est un ennemi
                 if (y is Rectangle && regexTagEnnemi.IsMatch((string)y.Tag))
                 {
@@ -114,8 +126,8 @@ namespace SAE1._01
 
 
 
-                    // Stop le jeu si ennemi trop bas
-                    if (Canvas.GetTop(y) >= (int)Application.Current.MainWindow.Height-100)
+                    // Test de collision avec joueur
+                    if (ennemi.IntersectsWith(joueur))
                     {
                         if (nbrVie <= 0)
                         {
@@ -138,6 +150,7 @@ namespace SAE1._01
             {
                 CreationEnnemi();
             }
+            // Suppression des ennemis mort
             foreach (Rectangle y in elementASuppr)
             {
                 myCanvas.Children.Remove(y);
