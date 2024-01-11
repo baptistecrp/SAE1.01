@@ -83,6 +83,10 @@ namespace SAE1._01
                     nbrScore ++;
                 }
             }
+            if (e.Key == Key.Enter)
+            {
+                Relance();
+            }
 
         }
         private void CreationEnnemi()
@@ -235,6 +239,30 @@ namespace SAE1._01
             myCanvas.Children.Add(anim);
             Canvas.SetTop(anim, y);
             Canvas.SetLeft(anim, x);
+        }
+
+        public void Relance()
+        // Suppression des ennemis
+        {
+            foreach (var y in myCanvas.Children.OfType<Rectangle>())
+            {
+                if (y is Rectangle && regexTagEnnemi.IsMatch((string)y.Tag))
+                {
+                    elementASuppr.Add(y);
+                }
+            }
+            foreach (Rectangle y in elementASuppr)
+            {
+                myCanvas.Children.Remove(y);
+            }
+            // Remise a zéro des valeurs de base
+            elementASuppr.Clear();
+            nbrScore = 0;
+            nbrVie = 3;
+            compteur = 0;
+            vitesseEnnemi = 0.5;
+            dispatcherTimer.Start();
+            
         }
     }
 }
