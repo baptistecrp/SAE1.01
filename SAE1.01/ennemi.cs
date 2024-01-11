@@ -50,6 +50,10 @@ namespace SAE1._01
 
             set
             {
+                if (value != TYPE_LENT && value  != TYPE_RAPIDE && value != TYPE_NORMAL)
+                {
+                    throw new ArgumentException("Le type n'est pas valable !");
+                }
                 this.type = value;
             }
         }
