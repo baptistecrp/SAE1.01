@@ -43,6 +43,7 @@ namespace SAE1._01
         private int nbrScore = 0;
         // Nombre vie restante
         private int nbrVie = 3;
+        // compteur pour animation
         private int compteur = 0;
         
         public MainWindow()
@@ -116,7 +117,7 @@ namespace SAE1._01
             myCanvas.Children.Add(nouvelEnnemi);
 
             // Modification vitesse pour accélérer
-            vitesseEnnemi += 0.1;
+            vitesseEnnemi += 0.05;
         }
         private void DeplacementEnnemi(Rectangle ennemi)
         {
