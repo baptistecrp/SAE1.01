@@ -34,7 +34,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Fill="White"
-            Tag="joueur1" />
+            Tag="joueur1" Panel.ZIndex="1" />
         <Label
             x:Name="score"
             Canvas.Left="705"
@@ -45,5 +45,6 @@
             FontSize="16"
             FontWeight="ExtraBold"
             Foreground="White" />
+        <Rectangle x:Name="fond" Height="450" Canvas.Left="0" Stroke="Black" Canvas.Top="0" Width="800" Tag="fond"/>
     </Canvas>
 </Window>
