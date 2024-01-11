@@ -37,6 +37,10 @@ namespace SAE1._01
         private String[] alpha = new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
         // liste élément à supprimer
         private List<Rectangle> elementASuppr = new List<Rectangle>() ;
+        // Score
+        private int nbrScore = 0;
+        // Nombre vie restante
+        private int nbrVie = 3;
         
         public MainWindow()
         {
@@ -64,9 +68,10 @@ namespace SAE1._01
                 if ((string)y.Tag == "ennemi" + e.Key)
                 {
                     elementASuppr.Add(y);
+                    nbrScore ++;
                 }
-                
             }
+
         }
         private void CreationEnnemi()
         {
@@ -105,12 +110,31 @@ namespace SAE1._01
                 {
 
                     // Deplacement
-                    DeplacementEnnemi(y);                    
+                    DeplacementEnnemi(y);
+
+
+
+                    // Stop le jeu si ennemi trop bas
+                    if (Canvas.GetTop(y) >= (int)Application.Current.MainWindow.Height-100)
+                    {
+                        if (nbrVie <= 0)
+                        {
+                            // Si plus de vie stop le jeu
+                            dispatcherTimer.Stop();
+                        }
+                        else
+                        {
+                            // Si encore de vie on retire une vie + suppression de l'ennemi + score -1
+                            nbrVie--;
+                            elementASuppr.Add(y);
+                            nbrScore--;
+                        }
+                    }
                 }
             }
 
             // Test pour faire apparaitre nouvel ennemi aléatoirement si possible
-            if (apparitionNouvelEnnemi && random.Next(1,30) == 3)
+            if (apparitionNouvelEnnemi && random.Next(1,35) == 3)
             {
                 CreationEnnemi();
             }
@@ -118,6 +142,12 @@ namespace SAE1._01
             {
                 myCanvas.Children.Remove(y);
             }
+
+            // Changement label score
+            score.Content = "Score: " + nbrScore;
+
+            // Changement label vie
+            vieRestante.Content = "Vie Restante: " + nbrVie;
         }
     }
 }

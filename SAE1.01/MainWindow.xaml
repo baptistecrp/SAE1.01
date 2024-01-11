@@ -18,7 +18,7 @@
         Background="Black"
         Focusable="True">
         <Label
-            Name="enemiesLeft"
+            Name="vieRestante"
             Panel.ZIndex="1"
             FontSize="16"
             FontWeight="ExtraBold"
@@ -35,5 +35,15 @@
             VerticalAlignment="Top"
             Fill="White"
             Tag="joueur1" />
+        <Label
+            x:Name="score"
+            Canvas.Left="705"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Panel.ZIndex="1"
+            Content="Score: 0"
+            FontSize="16"
+            FontWeight="ExtraBold"
+            Foreground="White" />
     </Canvas>
 </Window>
