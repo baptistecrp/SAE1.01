@@ -45,6 +45,7 @@ namespace SAE1._01
         public MainWindow()
         {
             InitializeComponent();
+            // Apparence du fond
             fond.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Background.png")));
             // Configuration du timer
             dispatcherTimer.Tick += Jeu;

@@ -48,6 +48,9 @@
     <None Update="img\L.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="img\lettre.psd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="img\M.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
