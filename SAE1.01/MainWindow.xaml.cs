@@ -48,6 +48,10 @@ namespace SAE1._01
         public MainWindow()
         {
             InitializeComponent();
+            // Ouverture de la fenetre du menu
+            MenuDialog menu = new MenuDialog();
+            menu.ShowDialog();
+            if (menu.DialogResult == false) { Application.Current.Shutdown(); }
             // Apparence du fond
             fond.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Background.png")));
             // Apparence du personnage
@@ -121,6 +125,7 @@ namespace SAE1._01
             // Parcourt de tous les rectangles du canvas
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
+                // Rect pour gérer colision
                 Rect ennemi = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
                 Rect joueur = new Rect(Canvas.GetLeft(joueur1), Canvas.GetTop(joueur1), joueur1.Width, joueur1.Height);
 

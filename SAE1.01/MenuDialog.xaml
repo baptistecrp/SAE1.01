@@ -1,0 +1,14 @@
+﻿<Window x:Class="SAE1._01.MenuDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SAE1._01"
+        mc:Ignorable="d"
+        Title="Menu" Height="300" Width="300">
+    <Grid>
+        <Button Content="Jouer" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="Button_Click_Jouer" Margin="0,0,150,20" Width="100"/>
+        <Button Content="Quitter" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="Button_Click_Quitter" Margin="150,0,0,20" Width="100"/>
+
+    </Grid>
+</Window>
