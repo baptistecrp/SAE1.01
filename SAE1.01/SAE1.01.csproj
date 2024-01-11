@@ -30,6 +30,9 @@
     <None Update="img\E.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="img\EnnemiTest.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="img\Explosion1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

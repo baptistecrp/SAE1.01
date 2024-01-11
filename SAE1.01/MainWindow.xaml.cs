@@ -90,17 +90,31 @@ namespace SAE1._01
             // Creation nouvel ennemi
             Ennemi ennemi = new Ennemi(alpha[random.Next(0,26)], Ennemi.TYPE_NORMAL);
             int nbLettre = Array.IndexOf(alpha, ennemi.Lettre);
-            Rectangle nouvelEnenemi = new Rectangle
+            // Creation de la lettre
+            Rectangle lettre = new Rectangle
             {
                 Tag = "ennemi"+ennemi.Lettre,
                 Height = 45,
                 Width = 45,
                 Fill = lettreImg[nbLettre],
             };
+            // Creation de l'ennemi
+            Rectangle nouvelEnnemi = new Rectangle
+            {
+                Tag = "ennemi" + ennemi.Lettre,
+                Height = 112,
+                Width = 45,
+                Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/EnnemiTest.png"))),
+            };
             // Placement aléatoire entre gauche et droite
-            Canvas.SetTop(nouvelEnenemi, Canvas.GetTop(joueur1));
-            Canvas.SetLeft(nouvelEnenemi, random.Next(0, 2)*(int)Application.Current.MainWindow.Width);
-            myCanvas.Children.Add(nouvelEnenemi);
+            Canvas.SetTop(lettre, Canvas.GetTop(joueur1)-45);
+            Canvas.SetTop(nouvelEnnemi, Canvas.GetTop(joueur1));
+            int x = random.Next(0, 2) * (int)Application.Current.MainWindow.Width;
+            Canvas.SetLeft(lettre, x);
+            Canvas.SetLeft(nouvelEnnemi, x);
+            myCanvas.Children.Add(lettre);
+            myCanvas.Children.Add(nouvelEnnemi);
+
             // Modification vitesse pour accélérer
             vitesseEnnemi += 0.1;
         }
