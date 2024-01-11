@@ -37,16 +37,21 @@ namespace SAE1._01
         private String[] alpha = new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
         // liste élément à supprimer
         private List<Rectangle> elementASuppr = new List<Rectangle>() ;
+        private List<Rectangle> animASuppr = new List<Rectangle>();
+
         // Score
         private int nbrScore = 0;
         // Nombre vie restante
         private int nbrVie = 3;
+        private int compteur = 0;
         
         public MainWindow()
         {
             InitializeComponent();
             // Apparence du fond
             fond.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Background.png")));
+            // Apparence du personnage
+            joueur1.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/AnimationSheet_Character.png")));
             // Configuration du timer
             dispatcherTimer.Tick += Jeu;
             // Rafraichissment chaque 16ms
@@ -155,14 +160,61 @@ namespace SAE1._01
             // Suppression des ennemis mort
             foreach (Rectangle y in elementASuppr)
             {
+                AnimationExplosion(Canvas.GetLeft(y), Canvas.GetTop(y));
                 myCanvas.Children.Remove(y);
             }
+            // vidage de la liste des elements a supprimer pour optimiser
+            elementASuppr.Clear();
 
+            foreach (Rectangle y in animASuppr)
+            {
+                myCanvas.Children.Remove(y);
+            }
+            // vidage de la liste des animations a supprimer pour optimiser
+            animASuppr.Clear();
+            
             // Changement label score
             score.Content = "Score: " + nbrScore;
 
             // Changement label vie
             vieRestante.Content = "Vie Restante: " + nbrVie;
+
+            compteur++;
+            // système d'animation
+            foreach (var y in myCanvas.Children.OfType<Rectangle>())
+            {
+                if ((string)y.Tag == "explo1")
+                {
+                    y.Tag = "explo2";
+                    y.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion1.png")));
+                }
+                else if ((string)y.Tag == "explo2" && compteur%10 == 0)
+                {
+                    y.Tag = "explo3";
+                    y.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion2.png")));
+                }
+                else if ((string)y.Tag == "explo3" && compteur % 10 == 0)
+                {
+                    y.Tag = "exploFin";
+                    y.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion3.png")));
+                }
+                else if ((string)y.Tag == "exploFin" && compteur % 10 == 0)
+                {
+                    animASuppr.Add(y);
+                }
+            }
+        }
+        public void AnimationExplosion(double x, double y)
+        {
+            Rectangle anim = new Rectangle
+            {
+                Tag = "explo1",
+                Width = 45,
+                Height = 45,
+            };
+            myCanvas.Children.Add(anim);
+            Canvas.SetTop(anim, y);
+            Canvas.SetLeft(anim, x);
         }
     }
 }
