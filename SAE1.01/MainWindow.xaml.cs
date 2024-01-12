@@ -22,7 +22,7 @@ namespace SAE1._01
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Regex regexTagEnnemi = new Regex("^ennemi.$");
+        private Regex regexTagEnnemi = new Regex("^ennemi.");
         // Timer
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         // Vitesse ennemi
@@ -38,6 +38,8 @@ namespace SAE1._01
         // liste élément à supprimer
         private List<Rectangle> elementASuppr = new List<Rectangle>() ;
         private List<Rectangle> animASuppr = new List<Rectangle>();
+        private ImageBrush[] animExplosion = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion3.png"))), };
+        private ImageBrush[] animEnnemi = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/EnnemiTest.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/AnimationSheet_Character.png"))) };
 
         // Score
         private int nbrScore = 0;
@@ -75,9 +77,10 @@ namespace SAE1._01
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
         { 
             Console.WriteLine(e.Key);
+            Regex regexEnnemi = new Regex("^ennemi"+@e.Key+".");
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
-                if ((string)y.Tag == "ennemi" + e.Key)
+                if (regexEnnemi.IsMatch((string)y.Tag+e.Key))
                 {
                     elementASuppr.Add(y);
                     nbrScore ++;
@@ -106,7 +109,8 @@ namespace SAE1._01
             // Creation de l'ennemi
             Rectangle nouvelEnnemi = new Rectangle
             {
-                Tag = "ennemi" + ennemi.Lettre,
+                Tag = "ennemi"+ennemi.Lettre,
+                Name = "ennemi0",
                 Height = 112,
                 Width = 45,
                 Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/EnnemiTest.png"))),
@@ -151,7 +155,7 @@ namespace SAE1._01
                 // Si le rectangle est un ennemi
                 if (y is Rectangle && regexTagEnnemi.IsMatch((string)y.Tag))
                 {
-
+                    Animation(animEnnemi, y, "ennemi", 20,true);
                     // Deplacement
                     DeplacementEnnemi(y);
 
@@ -184,7 +188,16 @@ namespace SAE1._01
             // Suppression des ennemis mort
             foreach (Rectangle y in elementASuppr)
             {
-                AnimationExplosion(Canvas.GetLeft(y), Canvas.GetTop(y));
+                Rectangle rectangleExplo = new Rectangle
+                {
+                    Tag = "explo",
+                    Name = "explo0",
+                    Width = 45,
+                    Height = 45,
+                };
+                myCanvas.Children.Add(rectangleExplo);
+                Canvas.SetTop(rectangleExplo, Canvas.GetTop(y));
+                Canvas.SetLeft(rectangleExplo, Canvas.GetLeft(y)); 
                 myCanvas.Children.Remove(y);
             }
             // vidage de la liste des elements a supprimer pour optimiser
@@ -204,41 +217,47 @@ namespace SAE1._01
             vieRestante.Content = "Vie Restante: " + nbrVie;
 
             compteur++;
+            Console.WriteLine(compteur);
             // système d'animation
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
-                if ((string)y.Tag == "explo1")
-                {
-                    y.Tag = "explo2";
-                    y.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion1.png")));
-                }
-                else if ((string)y.Tag == "explo2" && compteur%10 == 0)
-                {
-                    y.Tag = "explo3";
-                    y.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion2.png")));
-                }
-                else if ((string)y.Tag == "explo3" && compteur % 10 == 0)
-                {
-                    y.Tag = "exploFin";
-                    y.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion3.png")));
-                }
-                else if ((string)y.Tag == "exploFin" && compteur % 10 == 0)
-                {
-                    animASuppr.Add(y);
-                }
+                Animation(animExplosion, y, "explo", 2, false);
             }
         }
-        public void AnimationExplosion(double x, double y)
+
+        public void Animation(ImageBrush[] listeImage, Rectangle rectangle, string nomAnim, int vitesse, bool repete)
         {
-            Rectangle anim = new Rectangle
+            // Si repete est true lorsqu'on est à la dernière image on reviens à la première
+            if (repete && (string)rectangle.Name == nomAnim + listeImage.Length.ToString() && compteur % vitesse == 0)
             {
-                Tag = "explo1",
-                Width = 45,
-                Height = 45,
-            };
-            myCanvas.Children.Add(anim);
-            Canvas.SetTop(anim, y);
-            Canvas.SetLeft(anim, x);
+                rectangle.Name = nomAnim + "0";
+                rectangle.Fill = listeImage[0];
+            }
+            // Si repete est false lorsqu'on est à la dernière image on la supprime
+            else if (!repete &&(string)rectangle.Name == nomAnim + listeImage.Length.ToString() && compteur%vitesse==0)
+            {
+                    animASuppr.Add(rectangle);
+            }
+            // Si on est à la première image on la fait apparaitre directement
+            else if ((string)rectangle.Tag == nomAnim + "0")
+            {
+                rectangle.Name = nomAnim + "1";
+                rectangle.Fill = listeImage[0];
+            }
+            else
+            {
+                // pour chaque image de la liste d'image pour l'animation
+                for (int i = 0; i < listeImage.Length; i++)
+                {
+                    // Gestion avec le nom des rectangle pour changer image
+                    if ((string)rectangle.Name == nomAnim + i.ToString() && compteur % vitesse == 0)
+                    {
+                        rectangle.Name = nomAnim + ((i + 1).ToString());
+                        rectangle.Fill = listeImage[i];
+                        break;
+                    }
+                }
+            }            
         }
 
         public void Relance()
@@ -246,7 +265,7 @@ namespace SAE1._01
         {
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
-                if (y is Rectangle && regexTagEnnemi.IsMatch((string)y.Tag))
+                if (y is Rectangle && (string)y.Tag != "joueur1" && (string)y.Tag!= "fond")
                 {
                     elementASuppr.Add(y);
                 }
