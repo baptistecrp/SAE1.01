@@ -9,6 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="img\astro_arrow.cur" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="img\astro_arrow.cur">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="img\A.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -40,7 +40,8 @@ namespace SAE1._01
         private List<Rectangle> animASuppr = new List<Rectangle>();
         private ImageBrush[] animExplosion = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion3.png"))), };
         private ImageBrush[] animEnnemi = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/EnnemiTest.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/AnimationSheet_Character.png"))) };
-
+        // Curseur personnalisé
+        private Cursor curseur = new Cursor(Application.GetResourceStream(new Uri("img/astro_arrow.cur", UriKind.Relative)).Stream);
         // Score
         private int nbrScore = 0;
         // Nombre vie restante
@@ -51,6 +52,8 @@ namespace SAE1._01
         public MainWindow()
         {
             InitializeComponent();
+            // Application du curseur personnalisé sur le canvas
+            myCanvas.Cursor = curseur;
             // Ouverture de la fenetre du menu
             MenuDialog menu = new MenuDialog();
             menu.ShowDialog();
