@@ -78,7 +78,8 @@ namespace SAE1._01
             CreationEnnemi();
         }
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
-        { 
+        {
+            int nbEnnemi = 0;
             Console.WriteLine(e.Key);
             Regex regexEnnemi = new Regex("^ennemi"+@e.Key+".");
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
@@ -87,7 +88,12 @@ namespace SAE1._01
                 {
                     elementASuppr.Add(y);
                     nbrScore ++;
+                    nbEnnemi++;
                 }
+            }
+            if (nbEnnemi == 0)
+            {
+                nbrScore -= 5;
             }
             if (e.Key == Key.Enter)
             {
