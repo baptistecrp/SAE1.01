@@ -183,7 +183,6 @@ namespace SAE1._01
                             // Si encore de vie on retire une vie + suppression de l'ennemi + score -1
                             nbrVie--;
                             elementASuppr.Add(y);
-                            nbrScore--;
                         }
                     }
                 }
