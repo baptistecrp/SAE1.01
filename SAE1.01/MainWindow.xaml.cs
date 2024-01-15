@@ -224,7 +224,7 @@ namespace SAE1._01
             // système d'animation
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
-                Animation(animExplosion, y, "explo", 2, false);
+                Animation(animExplosion, y, "explo", 1, false);
             }
         }
 
