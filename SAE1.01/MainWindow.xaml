@@ -33,11 +33,12 @@
             Height="112"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            Panel.ZIndex="1"
             Fill="White"
-            Tag="joueur1" Panel.ZIndex="1" />
+            Tag="joueur1" />
         <Label
             x:Name="score"
-            Canvas.Left="705"
+            Canvas.Left="688"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Panel.ZIndex="1"
@@ -45,6 +46,13 @@
             FontSize="16"
             FontWeight="ExtraBold"
             Foreground="White" />
-        <Rectangle x:Name="fond" Height="450" Canvas.Left="0" Stroke="Black" Canvas.Top="0" Width="800" Tag="fond"/>
+        <Rectangle
+            x:Name="fond"
+            Canvas.Left="0"
+            Canvas.Top="0"
+            Width="800"
+            Height="450"
+            Stroke="Black"
+            Tag="fond" />
     </Canvas>
 </Window>
