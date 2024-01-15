@@ -160,8 +160,9 @@ namespace SAE1._01
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
                 Animation(animEnnemiMarche, y, "ennemi", 11-(int)(vitesseEnnemi*1.5 + 1) , true);
-                Console.WriteLine((11 - (int)(vitesseEnnemi + 1)));
                 Animation(animEnnemiMort, y, "mort", 2, false);
+                Animation(animExplosion, y, "lettreSuppr", 2, false);
+
 
                 // Rect pour gérer colision
                 Rect ennemi = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
@@ -203,6 +204,16 @@ namespace SAE1._01
             {
                 if (y.Name.Length > 7)
                 {
+                    Rectangle rectangleLettreSuppr = new Rectangle
+                    {
+                        Tag = "lettreSuppr0",
+                        Name = "lettreSuppr",
+                        Width = y.Width,
+                        Height = y.Height,
+                    };
+                    myCanvas.Children.Add(rectangleLettreSuppr);
+                    Canvas.SetTop(rectangleLettreSuppr, Canvas.GetTop(y));
+                    Canvas.SetLeft(rectangleLettreSuppr, Canvas.GetLeft(y));
                     myCanvas.Children.Remove(y);
 
                 }
