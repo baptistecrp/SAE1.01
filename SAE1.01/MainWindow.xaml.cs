@@ -224,7 +224,7 @@ namespace SAE1._01
             // système d'animation
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
-                Animation(animExplosion, y, "explo", 1, false);
+                Animation(animExplosion, y, "explo", 2, false);
             }
         }
 
@@ -242,7 +242,7 @@ namespace SAE1._01
                     animASuppr.Add(rectangle);
             }
             // Si on est à la première image on la fait apparaitre directement
-            else if ((string)rectangle.Tag == nomAnim + "0")
+            else if ((string)rectangle.Name == nomAnim + "0")
             {
                 rectangle.Name = nomAnim + "1";
                 rectangle.Fill = listeImage[0];
