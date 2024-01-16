@@ -48,7 +48,7 @@ namespace SAE1._01
         private int nbrScore = 0;
         // Nombre vie restante
         private int nbrVie = 3;
-        // compteur pour animation
+        // compteur pour animation/apparition
         private int compteur = 0;
         
         public MainWindow()
@@ -105,38 +105,41 @@ namespace SAE1._01
         private void CreationEnnemi()
         {
             Random random = new Random();
-            // Creation nouvel ennemi
-            Ennemi ennemi = new Ennemi(alpha[random.Next(0,26)], Ennemi.TYPE_NORMAL);
-            int nbLettre = Array.IndexOf(alpha, ennemi.Lettre);
-            // Creation de la lettre
-            Rectangle lettre = new Rectangle
+            if (compteur % 5 == 0)
             {
-                Name = "ennemi"+ennemi.Lettre+"Lettre",
-                Height = 45,
-                Width = 45,
-                Fill = lettreImg[nbLettre],
-            };
-            // Creation de l'ennemi
-            Rectangle nouvelEnnemi = new Rectangle
-            {
-                Name = "ennemi"+ennemi.Lettre,
-                Tag = "ennemi0",
-                Height = 115,
-                Width = 60,
-                Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/EnnemiTest.png"))),
-            };
-            Console.WriteLine(nouvelEnnemi.Name.Length);
-            // Placement aléatoire entre gauche et droite
-            Canvas.SetTop(lettre, Canvas.GetTop(joueur1)-45);
-            Canvas.SetTop(nouvelEnnemi, Canvas.GetTop(joueur1));
-            int x = random.Next(0, 2) * (int)Application.Current.MainWindow.Width;
-            Canvas.SetLeft(lettre, x);
-            Canvas.SetLeft(nouvelEnnemi, x);
-            myCanvas.Children.Add(lettre);
-            myCanvas.Children.Add(nouvelEnnemi);
+                // Creation nouvel ennemi
+                Ennemi ennemi = new Ennemi(alpha[random.Next(0, 26)], Ennemi.TYPE_NORMAL);
+                int nbLettre = Array.IndexOf(alpha, ennemi.Lettre);
+                // Creation de la lettre
+                Rectangle lettre = new Rectangle
+                {
+                    Name = "ennemi" + ennemi.Lettre + "Lettre",
+                    Height = 45,
+                    Width = 45,
+                    Fill = lettreImg[nbLettre],
+                };
+                // Creation de l'ennemi
+                Rectangle nouvelEnnemi = new Rectangle
+                {
+                    Name = "ennemi" + ennemi.Lettre,
+                    Tag = "ennemi0",
+                    Height = 115,
+                    Width = 60,
+                    Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/EnnemiTest.png"))),
+                };
+                Console.WriteLine(nouvelEnnemi.Name.Length);
+                // Placement aléatoire entre gauche et droite
+                Canvas.SetTop(lettre, Canvas.GetTop(joueur1) - 45);
+                Canvas.SetTop(nouvelEnnemi, Canvas.GetTop(joueur1));
+                int x = random.Next(0, 2) * (int)Application.Current.MainWindow.Width;
+                Canvas.SetLeft(lettre, x);
+                Canvas.SetLeft(nouvelEnnemi, x);
+                myCanvas.Children.Add(lettre);
+                myCanvas.Children.Add(nouvelEnnemi);
 
-            // Modification vitesse pour accélérer
-            vitesseEnnemi += 0.05;
+                // Modification vitesse pour accélérer
+                vitesseEnnemi += 0.05;
+            }
         }
         private void DeplacementEnnemi(Rectangle ennemi)
         {
