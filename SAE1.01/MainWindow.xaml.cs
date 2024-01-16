@@ -251,7 +251,7 @@ namespace SAE1._01
                     myCanvas.Children.Remove(y);
 
                 }
-                else
+                else if (regexTagEnnemi.IsMatch(y.Name))
                 {
                     Rectangle rectangleMort = new Rectangle
                     {
@@ -266,17 +266,14 @@ namespace SAE1._01
                     myCanvas.Children.Remove(y);
                     nbrScore++;
                 }
+                else
+                {
+                    myCanvas.Children.Remove(y);
+                }
                 
             }
             // vidage de la liste des elements a supprimer pour optimiser
             elementASuppr.Clear();
-
-            foreach (Rectangle y in animASuppr)
-            {
-                myCanvas.Children.Remove(y);
-            }
-            // vidage de la liste des animations a supprimer pour optimiser
-            animASuppr.Clear();
             
             // Changement label score
             score.Content = "Score: " + nbrScore;
@@ -289,7 +286,6 @@ namespace SAE1._01
             {
                 lettreJoueur.Visibility = Visibility.Hidden;
             }
-
             compteur++;
         }
 
@@ -304,7 +300,7 @@ namespace SAE1._01
             // Si repete est false lorsqu'on est à la dernière image on la supprime
             else if (!repete &&(string)rectangle.Tag == nomAnim + listeImage.Length.ToString() && compteur%vitesse==0)
             {
-                    animASuppr.Add(rectangle);
+                    elementASuppr.Add(rectangle);
             }
             // Si on est à la première image on la fait apparaitre directement
             else if ((string)rectangle.Tag == nomAnim + "0")
