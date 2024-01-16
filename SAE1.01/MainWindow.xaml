@@ -20,8 +20,9 @@
         <Label
             Name="vieRestante"
             Panel.ZIndex="1"
+            FontFamily="/SAE1.01;component/Fonts/Pixellari.ttf#Pixellari"
             FontSize="16"
-            FontWeight="ExtraBold"
+            FontWeight="Bold"
             Foreground="White">
             Vie Restante :
         </Label>
@@ -43,6 +44,7 @@
             VerticalAlignment="Center"
             Panel.ZIndex="1"
             Content="Score: 0"
+            FontFamily="/SAE1.01;component/Fonts/Pixellari.ttf#Pixellari"
             FontSize="16"
             FontWeight="ExtraBold"
             Foreground="White" />

@@ -9,10 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="fonts\Pixellari.ttf" />
     <None Remove="img\astro_arrow.cur" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="fonts\Pixellari.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\astro_arrow.cur">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
