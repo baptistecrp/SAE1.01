@@ -27,6 +27,8 @@ namespace SAE1._01
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         // Vitesse ennemi
         private double vitesseEnnemi = 0.5;
+        // Vitesse annimation
+        private double vitesseAnim = 10;
         // Skin ennemi
         private ImageBrush ennemiSkin = new ImageBrush();
         // Apparation Nouvel Ennemi
@@ -105,7 +107,14 @@ namespace SAE1._01
         private void CreationEnnemi()
         {
             Random random = new Random();
-            if (compteur % 60 == 0)
+            int nbrRafraichissement = 60;
+
+            if (nbrScore%50 == 0 && nbrRafraichissement > 10)
+            {
+                nbrRafraichissement -= 10;
+            }
+
+            if (compteur % 40 == 0)
             {
                 // Creation nouvel ennemi
                 Ennemi ennemi = new Ennemi(alpha[random.Next(0, 26)], Ennemi.TYPE_NORMAL);
@@ -139,6 +148,9 @@ namespace SAE1._01
 
                 // Modification vitesse pour accélérer
                 vitesseEnnemi += 0.05;
+
+                // Modification vitesse animation
+                vitesseAnim /= 0.999;
             }
         }
         private void DeplacementEnnemi(Rectangle ennemi)
@@ -162,7 +174,7 @@ namespace SAE1._01
             // Parcourt de tous les rectangles du canvas
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
-                Animation(animEnnemiMarche, y, "ennemi", 11-(int)(vitesseEnnemi*1.5 + 1) , true);
+                Animation(animEnnemiMarche, y, "ennemi", (int)vitesseAnim , true);
                 Animation(animEnnemiMort, y, "mort", 2, false);
                 Animation(animExplosion, y, "lettreSuppr", 2, false);
 
