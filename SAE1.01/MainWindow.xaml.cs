@@ -22,7 +22,8 @@ namespace SAE1._01
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Regex regexTagEnnemi = new Regex("^ennemi.");
+        private Regex regexTagToutEnnemi = new Regex("^ennemi.");
+        private Regex regexTagEnnemi = new Regex("^ennemi.$");
         // Timer
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         // Vitesse ennemi
@@ -194,7 +195,7 @@ namespace SAE1._01
                 Rect joueurRect = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
 
                 // Si le rectangle est un ennemi
-                if (y is Rectangle && regexTagEnnemi.IsMatch((string)y.Name))
+                if (y is Rectangle && regexTagToutEnnemi.IsMatch((string)y.Name))
                 {
                     // Deplacement
                     DeplacementEnnemi(y);
@@ -204,6 +205,7 @@ namespace SAE1._01
                     // Test de collision avec joueur
                     if (ennemi.IntersectsWith(joueurRect))
                     {
+
                         if (nbrVie <= 0)
                         {
                             // Si plus de vie stop le jeu
@@ -212,7 +214,10 @@ namespace SAE1._01
                         else
                         {
                             // Si encore de vie on retire une vie + suppression de l'ennemi + score -1
-                            nbrVie--;
+                            if (regexTagEnnemi.IsMatch((string)y.Name))
+                            {
+                                nbrVie--;
+                            }
                             elementASuppr.Add(y);
                             nbrScore--;
                         }
