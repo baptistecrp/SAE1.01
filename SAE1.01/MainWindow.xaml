@@ -26,7 +26,7 @@
             Vie Restante :
         </Label>
         <Rectangle
-            Name="joueur1"
+            Name="joueur"
             Canvas.Left="372"
             Canvas.Top="245"
             Width="64"
@@ -35,7 +35,7 @@
             VerticalAlignment="Top"
             Panel.ZIndex="1"
             Fill="White"
-            Tag="joueur1" />
+            Tag="joueur0" />
         <Label
             x:Name="score"
             Canvas.Left="688"

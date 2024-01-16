@@ -43,6 +43,7 @@ namespace SAE1._01
         private ImageBrush[] animExplosion = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Explosion3.png"))), };
         private ImageBrush[] animEnnemiMarche = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche3.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche4.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche5.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche6.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche7.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche8.png")))  , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche9.png"))) };
         private ImageBrush[] animEnnemiMort = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort3.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort4.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort5.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort6.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort7.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort8.png")))};
+        private ImageBrush[] animJoueurStatique = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/joueurStatique/joueurStatique1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/joueurStatique/joueurStatique2.png"))) };
 
         // Curseur personnalisé
         private Cursor curseur = new Cursor(Application.GetResourceStream(new Uri("img/astro_arrow.cur", UriKind.Relative)).Stream);
@@ -64,8 +65,6 @@ namespace SAE1._01
             if (menu.DialogResult == false) { Application.Current.Shutdown(); }
             // Apparence du fond
             fond.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/fond.png")));
-            // Apparence du personnage
-            joueur1.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/AnimationSheet_Character.png")));
             // Configuration du timer
             dispatcherTimer.Tick += Jeu;
             // Rafraichissment chaque 16ms
@@ -115,14 +114,9 @@ namespace SAE1._01
         private void CreationEnnemi()
         {
             Random random = new Random();
-            int nbrRafraichissement = 60;
+            int nbrRafraichissement = random.Next(30,51);
 
-            if (nbrScore%50 == 0 && nbrRafraichissement > 10)
-            {
-                nbrRafraichissement -= 10;
-            }
-
-            if (compteur % 40 == 0)
+            if (compteur % nbrRafraichissement == 0)
             {
                 // Creation nouvel ennemi
                 Ennemi ennemi = new Ennemi(alpha[random.Next(0, 26)], Ennemi.TYPE_NORMAL);
@@ -146,8 +140,8 @@ namespace SAE1._01
                 };
                 Console.WriteLine(nouvelEnnemi.Name.Length);
                 // Placement aléatoire entre gauche et droite
-                Canvas.SetTop(lettre, Canvas.GetTop(joueur1) - 45);
-                Canvas.SetTop(nouvelEnnemi, Canvas.GetTop(joueur1));
+                Canvas.SetTop(lettre, Canvas.GetTop(joueur) - 45);
+                Canvas.SetTop(nouvelEnnemi, Canvas.GetTop(joueur));
                 int x = random.Next(0, 2) * (int)Application.Current.MainWindow.Width;
                 Canvas.SetLeft(lettre, x);
                 Canvas.SetLeft(nouvelEnnemi, x);
@@ -164,12 +158,12 @@ namespace SAE1._01
         private void DeplacementEnnemi(Rectangle ennemi)
         {
             // Deplacement vers la droite des ennemis à gauche
-            if (Canvas.GetLeft(ennemi) < Canvas.GetLeft(joueur1))
+            if (Canvas.GetLeft(ennemi) < Canvas.GetLeft(joueur))
             {
                 Canvas.SetLeft(ennemi, Canvas.GetLeft(ennemi) + vitesseEnnemi);
             }
             // Deplacement vers la gauche des ennemis à droite
-            if (Canvas.GetLeft(ennemi) > Canvas.GetLeft(joueur1)+joueur1.Width)
+            if (Canvas.GetLeft(ennemi) > Canvas.GetLeft(joueur)+joueur.Width)
             {
                 Canvas.SetLeft(ennemi, Canvas.GetLeft(ennemi) - vitesseEnnemi);
             }
@@ -185,11 +179,13 @@ namespace SAE1._01
                 Animation(animEnnemiMarche, y, "ennemi", (int)vitesseAnim , true);
                 Animation(animEnnemiMort, y, "mort", 2, false);
                 Animation(animExplosion, y, "lettreSuppr", 2, false);
+                Animation(animJoueurStatique, y, "joueur", 10, true);
+
 
 
                 // Rect pour gérer colision
                 Rect ennemi = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
-                Rect joueur = new Rect(Canvas.GetLeft(joueur1), Canvas.GetTop(joueur1), joueur1.Width, joueur1.Height);
+                Rect joueurRect = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
 
                 // Si le rectangle est un ennemi
                 if (y is Rectangle && regexTagEnnemi.IsMatch((string)y.Name))
@@ -200,7 +196,7 @@ namespace SAE1._01
 
 
                     // Test de collision avec joueur
-                    if (ennemi.IntersectsWith(joueur))
+                    if (ennemi.IntersectsWith(joueurRect))
                     {
                         if (nbrVie <= 0)
                         {
@@ -320,7 +316,7 @@ namespace SAE1._01
         {
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
-                if (y is Rectangle && (string)y.Tag != "joueur1" && (string)y.Tag!= "fond")
+                if (y is Rectangle && (string)y.Name != "joueur" && (string)y.Tag!= "fond")
                 {
                     elementASuppr.Add(y);
                 }
