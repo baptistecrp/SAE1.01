@@ -30,7 +30,7 @@ namespace SAE1._01
         // Vitesse ennemi
         private double vitesseEnnemi = 0.5;
         // Vitesse annimation
-        private double vitesseAnim = 10;
+        private double vitesseAnim = 11;
         // Liste image lettre
         private ImageBrush[] lettreImg = new ImageBrush[26];
         // Alphabet
@@ -338,6 +338,7 @@ namespace SAE1._01
             nbrVie = 3;
             compteur = 0;
             vitesseEnnemi = 0.5;
+            vitesseAnim = 11;
             dispatcherTimer.Start();
             
         }
