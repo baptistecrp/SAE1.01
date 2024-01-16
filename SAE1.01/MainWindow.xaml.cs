@@ -183,7 +183,11 @@ namespace SAE1._01
         private void Jeu(object sender, EventArgs e)
         {
             Random random = new Random();
-
+            if (nbrVie <= 0)
+                        {
+                            // Si plus de vie stop le jeu
+                            dispatcherTimer.Stop();
+                        }
             // Parcourt de tous les rectangles du canvas
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
@@ -207,26 +211,16 @@ namespace SAE1._01
                     DeplacementEnnemi(y);
                     y.Cursor = curseurClick;
 
-
                     // Test de collision avec joueur
                     if (ennemi.IntersectsWith(joueurRect))
                     {
-
-                        if (nbrVie <= 0)
+                        // Si encore de vie on retire une vie + suppression de l'ennemi + score -1
+                        if (regexTagEnnemi.IsMatch((string)y.Name))
                         {
-                            // Si plus de vie stop le jeu
-                            dispatcherTimer.Stop();
-                        }
-                        else
-                        {
-                            // Si encore de vie on retire une vie + suppression de l'ennemi + score -1
-                            if (regexTagEnnemi.IsMatch((string)y.Name))
-                            {
                                 nbrVie--;
-                            }
-                            elementASuppr.Add(y);
-                            nbrScore--;
                         }
+                        elementASuppr.Add(y);
+                        nbrScore--;
                     }
                 }
             }
@@ -329,7 +323,7 @@ namespace SAE1._01
         {
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
-                if (y is Rectangle && (string)y.Name != "joueur" && (string)y.Tag!= "fond")
+                if (y is Rectangle && regexTagToutEnnemi.IsMatch(y.Name))
                 {
                     elementASuppr.Add(y);
                 }
