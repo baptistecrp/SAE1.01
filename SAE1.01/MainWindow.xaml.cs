@@ -24,6 +24,7 @@ namespace SAE1._01
     {
         private Regex regexTagToutEnnemi = new Regex("^ennemi.");
         private Regex regexTagEnnemi = new Regex("^ennemi.$");
+        private Regex regexTagLettre = new Regex("Lettre$");
         // Timer
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         // Vitesse ennemi
@@ -235,7 +236,7 @@ namespace SAE1._01
             // Suppression des ennemis mort
             foreach (Rectangle y in elementASuppr)
             {
-                if (y.Name.Length > 7)
+                if (regexTagLettre.IsMatch(y.Name))
                 {
                     Rectangle rectangleLettreSuppr = new Rectangle
                     {
