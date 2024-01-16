@@ -160,7 +160,7 @@ namespace SAE1._01
                 #endif
 
                 // Modification vitesse animation
-                vitesseAnim *= 0.999;
+                vitesseAnim *= 0.990;
                 #if DEBUG
                                 Console.WriteLine("Vitesse Animation: " + vitesseAnim);
                 #endif
