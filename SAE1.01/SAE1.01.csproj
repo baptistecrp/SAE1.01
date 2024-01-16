@@ -133,6 +133,24 @@
     <None Update="img\L.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="img\lettreDisparition\lettreDisparition1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\lettreDisparition\lettreDisparition2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\lettreDisparition\lettreDisparition3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\lettreDisparition\lettreDisparition4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\lettreDisparition\lettreDisparition5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\lettreDisparition\lettreDisparition6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="img\M.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
