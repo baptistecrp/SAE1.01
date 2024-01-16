@@ -29,10 +29,6 @@ namespace SAE1._01
         private double vitesseEnnemi = 0.5;
         // Vitesse annimation
         private double vitesseAnim = 10;
-        // Skin ennemi
-        private ImageBrush ennemiSkin = new ImageBrush();
-        // Apparation Nouvel Ennemi
-        private bool apparitionNouvelEnnemi = true;
         // Liste image lettre
         private ImageBrush[] lettreImg = new ImageBrush[26];
         // Alphabet
@@ -56,6 +52,9 @@ namespace SAE1._01
         
         public MainWindow()
         {
+            #if DEBUG
+                        Console.WriteLine("Debug version");
+            #endif
             InitializeComponent();
             // Application du curseur personnalisé sur le canvas
             myCanvas.Cursor = curseur;
@@ -83,7 +82,9 @@ namespace SAE1._01
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
         {
             int nbEnnemi = 0;
-            Console.WriteLine(e.Key);
+            #if DEBUG
+                Console.WriteLine("Touche appuyer: " + e.Key);
+            #endif
             Regex regexEnnemi = new Regex("^ennemi"+@e.Key);
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
@@ -138,7 +139,6 @@ namespace SAE1._01
                     Width = 60,
                     Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/EnnemiTest.png"))),
                 };
-                Console.WriteLine(nouvelEnnemi.Name.Length);
                 // Placement aléatoire entre gauche et droite
                 Canvas.SetTop(lettre, Canvas.GetTop(joueur) - 45);
                 Canvas.SetTop(nouvelEnnemi, Canvas.GetTop(joueur));
@@ -150,9 +150,15 @@ namespace SAE1._01
 
                 // Modification vitesse pour accélérer
                 vitesseEnnemi += 0.05;
+                #if DEBUG
+                                Console.WriteLine("Vitesse Ennemi: " + vitesseEnnemi);
+                #endif
 
                 // Modification vitesse animation
-                vitesseAnim /= 0.999;
+                vitesseAnim *= 0.999;
+                #if DEBUG
+                                Console.WriteLine("Vitesse Animation: " + vitesseAnim);
+                #endif
             }
         }
         private void DeplacementEnnemi(Rectangle ennemi)
