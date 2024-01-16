@@ -105,7 +105,7 @@ namespace SAE1._01
         private void CreationEnnemi()
         {
             Random random = new Random();
-            if (compteur % 5 == 0)
+            if (compteur % 60 == 0)
             {
                 // Creation nouvel ennemi
                 Ennemi ennemi = new Ennemi(alpha[random.Next(0, 26)], Ennemi.TYPE_NORMAL);
@@ -198,11 +198,8 @@ namespace SAE1._01
                 }
             }
 
-            // Test pour faire apparaitre nouvel ennemi aléatoirement si possible
-            if (apparitionNouvelEnnemi && random.Next(1,35) == 3)
-            {
-                CreationEnnemi();
-            }
+            CreationEnnemi();
+
             // Suppression des ennemis mort
             foreach (Rectangle y in elementASuppr)
             {
