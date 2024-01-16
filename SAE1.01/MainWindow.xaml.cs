@@ -45,6 +45,8 @@ namespace SAE1._01
 
         // Curseur personnalisé
         private Cursor curseur = new Cursor(Application.GetResourceStream(new Uri("img/astro_arrow.cur", UriKind.Relative)).Stream);
+        private Cursor curseurClick = new Cursor(Application.GetResourceStream(new Uri("img/astro_link.cur", UriKind.Relative)).Stream);
+
         // Score
         private int nbrScore = 0;
         // Nombre vie restante
@@ -202,7 +204,7 @@ namespace SAE1._01
                 {
                     // Deplacement
                     DeplacementEnnemi(y);
-
+                    y.Cursor = curseurClick;
 
 
                     // Test de collision avec joueur

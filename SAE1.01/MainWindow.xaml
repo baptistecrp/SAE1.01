@@ -79,8 +79,10 @@
             Canvas.Top="258"
             Width="60"
             Height="60"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
             Panel.ZIndex="1"
             Fill="#FFFF0808"
-            Tag="flamme0" HorizontalAlignment="Center" VerticalAlignment="Top" />
+            Tag="flamme0" />
     </Canvas>
 </Window>
