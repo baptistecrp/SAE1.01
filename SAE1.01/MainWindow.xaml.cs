@@ -98,6 +98,14 @@ namespace SAE1._01
             {
                 nbrScore -= 2;
             }
+            for (int i = 0;i < alpha.Length;i++) 
+            { 
+                if (e.Key.ToString() == alpha[i])
+                {
+                    lettreJoueur.Visibility = Visibility.Visible;
+                    lettreJoueur.Fill = lettreImg[i];
+                }
+            }
             if (e.Key == Key.Enter)
             {
                 Relance();
@@ -262,6 +270,12 @@ namespace SAE1._01
 
             // Changement label vie
             vieRestante.Content = "Vie Restante: " + nbrVie;
+
+            // Cacher lettre au dessus joueur
+            if (compteur % 40 == 0)
+            {
+                lettreJoueur.Visibility = Visibility.Hidden;
+            }
 
             compteur++;
         }

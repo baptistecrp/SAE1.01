@@ -54,5 +54,11 @@
             Height="450"
             Stroke="Black"
             Tag="fond" />
+        <Rectangle
+            x:Name="lettreJoueur"
+            Canvas.Left="372"
+            Canvas.Top="161"
+            Width="64"
+            Height="64" />
     </Canvas>
 </Window>
