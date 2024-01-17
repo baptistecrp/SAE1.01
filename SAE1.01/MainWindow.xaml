@@ -11,7 +11,6 @@
     FocusManager.FocusedElement="{Binding ElementName=myCanvas}"
     Icon="/icon.png"
     KeyUp="CanvasKeyIsUp"
-    ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Canvas

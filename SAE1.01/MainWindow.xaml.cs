@@ -22,6 +22,10 @@ namespace SAE1._01
     /// </summary>
     public partial class MainWindow : Window
     {
+        private double multiplicateurX = 1;
+        private double multiplicateurY = 1;
+        private double largeurFenetre = 800;
+        private double hauteurFenetre = 450;
         // Regex
         private Regex regexTagToutEnnemi = new Regex("^ennemi.");
         private Regex regexTagEnnemi = new Regex("^ennemi.$");
@@ -153,8 +157,8 @@ namespace SAE1._01
                 Rectangle lettre = new Rectangle
                 {
                     Name = "ennemi" + alpha[nbLettre] + "Lettre",
-                    Height = 45,
-                    Width = 45,
+                    Height = 45*multiplicateurY,
+                    Width = 45*multiplicateurX,
                     Fill = lettreImg[nbLettre],
                 };
                 // Creation de l'ennemi
@@ -162,13 +166,16 @@ namespace SAE1._01
                 {
                     Name = "ennemi" + alpha[nbLettre],
                     Tag = "ennemi0",
-                    Height = 115,
-                    Width = 60,
+                    Height = 115*multiplicateurY,
+                    Width = 60*multiplicateurX,
                 };
                 // Placement aléatoire entre gauche et droite
-                Canvas.SetTop(lettre, Canvas.GetTop(joueur) - 45);
+                Canvas.SetTop(lettre, Canvas.GetTop(joueur) - 45*multiplicateurY);
                 Canvas.SetTop(nouvelEnnemi, Canvas.GetTop(joueur));
                 int x = random.Next(0, 2) * (int)Application.Current.MainWindow.Width;
+                // pour que les ennemis apparaissent en dehors de la fenetre
+                if (x == 0) { x -= (int)nouvelEnnemi.Width; }
+                // si un ennemi est à droite on change le nom pour les animations
                 if (x > Canvas.GetLeft(joueur) + joueur.Width)
                 {
                     nouvelEnnemi.Tag = "ennemiDroite0";
@@ -210,6 +217,7 @@ namespace SAE1._01
         }
         private void Jeu(object sender, EventArgs e)
         {
+            RedimensionFenetre();
             if (nbrVie <= 0)
                         {
                             // Si plus de vie stop le jeu
@@ -266,8 +274,8 @@ namespace SAE1._01
                     {
                         Tag = "lettreSuppr0",
                         Name = "lettreSuppr",
-                        Width = 45,
-                        Height = 39,
+                        Width = 45*multiplicateurX,
+                        Height = 39*multiplicateurY,
                     };
                     myCanvas.Children.Add(rectangleLettreSuppr);
                     Canvas.SetTop(rectangleLettreSuppr, Canvas.GetTop(y));
@@ -281,8 +289,8 @@ namespace SAE1._01
                     {
                         Tag = "mort0",
                         Name = "mort",
-                        Width = 140,
-                        Height = 165,
+                        Width = 140*multiplicateurX,
+                        Height = 165*multiplicateurY,
                     };
                     if (Canvas.GetLeft(y) > Canvas.GetLeft(joueur) + joueur.Width)
                     {
@@ -378,6 +386,24 @@ namespace SAE1._01
             vitesseAnim = 11;
             dispatcherTimer.Start();
             
+        }
+        public void RedimensionFenetre()
+        {
+            // méthode pour redimensionner tout les éléments de la fenetre 
+            double largeurNouvelleFenetre = (int)Application.Current.MainWindow.Width;
+            double hauteurNouvelleFenetre = (int)Application.Current.MainWindow.Height;
+            foreach (var y in myCanvas.Children.OfType<Rectangle>())
+            {
+                multiplicateurX = largeurFenetre/800;
+                multiplicateurY = hauteurFenetre/455;
+                Console.WriteLine(multiplicateurX + " " + multiplicateurY);
+                y.Width = largeurNouvelleFenetre * (y.Width / largeurFenetre);
+                y.Height = hauteurNouvelleFenetre * (y.Height / hauteurFenetre);
+                Canvas.SetLeft(y, largeurNouvelleFenetre * (Canvas.GetLeft(y) / largeurFenetre));
+                Canvas.SetTop(y, hauteurNouvelleFenetre * (Canvas.GetTop(y) / hauteurFenetre));
+            }
+            largeurFenetre = largeurNouvelleFenetre;
+            hauteurFenetre = hauteurNouvelleFenetre;
         }
     }
 }
