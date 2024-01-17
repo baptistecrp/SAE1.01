@@ -56,6 +56,9 @@ namespace SAE1._01
         private int nbrVie = 3;
         // compteur pour animation/apparition
         private int compteur = 0;
+
+        // Test difficulté arcade
+        bool diffArcade = false;
         
         public MainWindow()
         {
@@ -69,6 +72,17 @@ namespace SAE1._01
             MenuDialog menu = new MenuDialog();
             menu.ShowDialog();
             if (menu.DialogResult == false) { Application.Current.Shutdown(); }
+            // Test difficulté dur
+            if (menu.durBool == true)
+            {
+                vitesseAnim /= 2.5;
+                vitesseEnnemi *= 2.5;
+            }
+            // Test difficulté arcade
+            if (menu.arcadeBool == true)
+            {
+                diffArcade = true;
+            }
             // Apparence du fond
             fond.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/fond.png")));
             // Configuration du timer
@@ -158,17 +172,20 @@ namespace SAE1._01
                 myCanvas.Children.Add(lettre);
                 myCanvas.Children.Add(nouvelEnnemi);
 
-                // Modification vitesse pour accélérer
-                vitesseEnnemi += 0.05;
-                #if DEBUG
-                                Console.WriteLine("Vitesse Ennemi: " + vitesseEnnemi);
-                #endif
+                if (diffArcade == false)
+                {
+                    // Modification vitesse pour accélérer
+                    vitesseEnnemi += 0.05;
+                    #if DEBUG
+                        Console.WriteLine("Vitesse Ennemi: " + vitesseEnnemi);
+                    #endif
 
-                // Modification vitesse animation
-                vitesseAnim *= 0.990;
-                #if DEBUG
-                                Console.WriteLine("Vitesse Animation: " + vitesseAnim);
-                #endif
+                    // Modification vitesse animation
+                    vitesseAnim *= 0.990;
+                    #if DEBUG
+                        Console.WriteLine("Vitesse Animation: " + vitesseAnim);
+                    #endif
+                }
             }
         }
         private void DeplacementEnnemi(Rectangle ennemi)
