@@ -59,7 +59,10 @@ namespace SAE1._01
         private int compteur = 0;
 
         // Random
-        Random random = new Random();
+        private Random random = new Random();
+
+        // Son Ennemi
+        private MediaPlayer sonEnnemi = new MediaPlayer();
 
         // Test difficulté arcade
         bool diffArcade = false;
@@ -95,6 +98,8 @@ namespace SAE1._01
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             // Lancement timer
             dispatcherTimer.Start();
+            // Chargement son ennemi
+            sonEnnemi.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/test.wav"));
             // Creation de la liste des images de lettre
             for (int i = 0; i < alpha.Length; i++)
             {
@@ -118,6 +123,7 @@ namespace SAE1._01
                 {
                     elementASuppr.Add(y);
                     nbEnnemi++;
+                    sonEnnemi.Play();
                 }
             }
             if (nbEnnemi == 0)
