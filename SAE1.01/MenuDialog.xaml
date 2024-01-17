@@ -51,6 +51,7 @@
             Checked="Arcade_Check"
             Content="Mode Arcade"
             IsChecked="False" />
+        <CheckBox Content="Pleine Écran" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" IsChecked="False" Checked="PleinEcran_Check"/>
 
     </Grid>
 </Window>

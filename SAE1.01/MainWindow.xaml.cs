@@ -94,6 +94,12 @@ namespace SAE1._01
             {
                 diffArcade = true;
             }
+            if (menu.pleinEcran)
+            {
+                FenetrePrincipale.WindowState = WindowState.Maximized;
+
+                FenetrePrincipale.WindowStyle = WindowStyle.None;
+            }
             // Apparence du fond
             fond.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/fond.png")));
             // Configuration du timer
@@ -157,8 +163,8 @@ namespace SAE1._01
                 Rectangle lettre = new Rectangle
                 {
                     Name = "ennemi" + alpha[nbLettre] + "Lettre",
-                    Height = 45*multiplicateurY,
-                    Width = 45*multiplicateurX,
+                    Height = 48*multiplicateurY,
+                    Width = 48*multiplicateurX,
                     Fill = lettreImg[nbLettre],
                 };
                 // Creation de l'ennemi
@@ -170,7 +176,7 @@ namespace SAE1._01
                     Width = 60*multiplicateurX,
                 };
                 // Placement aléatoire entre gauche et droite
-                Canvas.SetTop(lettre, Canvas.GetTop(joueur) - 45*multiplicateurY);
+                Canvas.SetTop(lettre, Canvas.GetTop(joueur) - lettre.Height);
                 Canvas.SetTop(nouvelEnnemi, Canvas.GetTop(joueur));
                 int x = random.Next(0, 2) * (int)Application.Current.MainWindow.Width;
                 // pour que les ennemis apparaissent en dehors de la fenetre
@@ -395,7 +401,7 @@ namespace SAE1._01
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
                 multiplicateurX = largeurFenetre/800;
-                multiplicateurY = hauteurFenetre/455;
+                multiplicateurY = hauteurFenetre/450;
                 Console.WriteLine(multiplicateurX + " " + multiplicateurY);
                 y.Width = largeurNouvelleFenetre * (y.Width / largeurFenetre);
                 y.Height = hauteurNouvelleFenetre * (y.Height / hauteurFenetre);

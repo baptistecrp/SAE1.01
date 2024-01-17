@@ -22,6 +22,7 @@ namespace SAE1._01
         public bool arcadeBool = false;
         public bool normalBool = false;
         public bool durBool = false;
+        public bool pleinEcran = false;
         public MenuDialog()
         {
             InitializeComponent();
@@ -65,6 +66,11 @@ namespace SAE1._01
             normalBool = false;
             durBool = true;
             Console.WriteLine(arcadeBool + " " + normalBool + " " + durBool);
+        }
+
+        private void PleinEcran_Check(object sender, RoutedEventArgs e)
+        {
+            pleinEcran = true;
         }
     }
 }
