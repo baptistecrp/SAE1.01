@@ -40,8 +40,10 @@ namespace SAE1._01
         private List<Rectangle> animASuppr = new List<Rectangle>();
         private ImageBrush[] animLettreDisparition = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/lettreDisparition/lettreDisparition1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/lettreDisparition/lettreDisparition2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/lettreDisparition/lettreDisparition3.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/lettreDisparition/lettreDisparition4.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/lettreDisparition/lettreDisparition5.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/lettreDisparition/lettreDisparition6.png"))) };
         private ImageBrush[] animEnnemiMarche = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche3.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche4.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche5.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche6.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche7.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche8.png")))  , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche9.png"))) };
+        private ImageBrush[] animEnnemiMarcheDroite = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche3.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche4.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche5.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche6.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche7.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche8.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche9.png"))) };
         private ImageBrush[] animFlamme = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/flamme/flamme1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/flamme/flamme2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/flamme/flamme3.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/flamme/flamme4.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/flamme/flamme5.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/flamme/flamme6.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/flamme/flamme7.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/flamme/flamme8.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/flamme/flamme9.png"))) };
-        private ImageBrush[] animEnnemiMort = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort3.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort4.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort5.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort6.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort7.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort8.png")))};
+        private ImageBrush[] animEnnemiMort = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort3.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort4.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort5.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort6.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort7.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort8.png"))) };
+        private ImageBrush[] animEnnemiMortDroite = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort3.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort4.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort5.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort6.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort7.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort8.png")))};
         private ImageBrush[] animJoueurStatique = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/joueurStatique/joueurStatique1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/joueurStatique/joueurStatique2.png"))) };
 
         // Curseur personnalisé
@@ -142,12 +144,15 @@ namespace SAE1._01
                     Tag = "ennemi0",
                     Height = 115,
                     Width = 60,
-                    Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/EnnemiTest.png"))),
                 };
                 // Placement aléatoire entre gauche et droite
                 Canvas.SetTop(lettre, Canvas.GetTop(joueur) - 45);
                 Canvas.SetTop(nouvelEnnemi, Canvas.GetTop(joueur));
                 int x = random.Next(0, 2) * (int)Application.Current.MainWindow.Width;
+                if (x > Canvas.GetLeft(joueur) + joueur.Width)
+                {
+                    nouvelEnnemi.Tag = "ennemiDroite0";
+                }
                 Canvas.SetLeft(lettre, x);
                 Canvas.SetLeft(nouvelEnnemi, x);
                 myCanvas.Children.Add(lettre);
@@ -191,12 +196,15 @@ namespace SAE1._01
             // Parcourt de tous les rectangles du canvas
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
+
                 Animation(animEnnemiMarche, y, "ennemi", (int)vitesseAnim , true);
+                Animation(animEnnemiMarcheDroite, y, "ennemiDroite", (int)vitesseAnim, true);
+                Animation(animEnnemiMortDroite, y, "mortDroite", 2, false);
                 Animation(animEnnemiMort, y, "mort", 2, false);
                 Animation(animLettreDisparition, y, "lettreSuppr", 2, false);
                 Animation(animJoueurStatique, y, "joueur", 10, true);
                 Animation(animFlamme, y, "flamme", 3, true);
-
+                
 
 
 
@@ -242,11 +250,11 @@ namespace SAE1._01
                     myCanvas.Children.Add(rectangleLettreSuppr);
                     Canvas.SetTop(rectangleLettreSuppr, Canvas.GetTop(y));
                     Canvas.SetLeft(rectangleLettreSuppr, Canvas.GetLeft(y));
-                    myCanvas.Children.Remove(y);
 
                 }
                 else if (regexTagEnnemi.IsMatch(y.Name))
                 {
+
                     Rectangle rectangleMort = new Rectangle
                     {
                         Tag = "mort0",
@@ -254,16 +262,23 @@ namespace SAE1._01
                         Width = 140,
                         Height = 165,
                     };
+                    if (Canvas.GetLeft(y) > Canvas.GetLeft(joueur) + joueur.Width)
+                    {
+                        rectangleMort.Tag = "mortDroite0";
+                        Canvas.SetTop(rectangleMort, Canvas.GetTop(y) - (rectangleMort.Height - y.Height));
+                        Canvas.SetLeft(rectangleMort, Canvas.GetLeft(y));
+                    }
+                    else
+                    {
+                        Canvas.SetTop(rectangleMort, Canvas.GetTop(y) - (rectangleMort.Height - y.Height));
+                        Canvas.SetLeft(rectangleMort, Canvas.GetLeft(y) + (y.Width-rectangleMort.Width));
+                        Console.WriteLine(Canvas.GetLeft(y));
+                    }
                     myCanvas.Children.Add(rectangleMort);
-                    Canvas.SetTop(rectangleMort, Canvas.GetTop(y) - (rectangleMort.Height - y.Height));
-                    Canvas.SetLeft(rectangleMort, Canvas.GetLeft(y) - (rectangleMort.Width - y.Width));
-                    myCanvas.Children.Remove(y);
                     nbrScore++;
                 }
-                else
-                {
-                    myCanvas.Children.Remove(y);
-                }
+                myCanvas.Children.Remove(y);
+                
                 
             }
             // vidage de la liste des elements a supprimer pour optimiser
