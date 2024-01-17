@@ -22,6 +22,7 @@ namespace SAE1._01
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Regex
         private Regex regexTagToutEnnemi = new Regex("^ennemi.");
         private Regex regexTagEnnemi = new Regex("^ennemi.$");
         private Regex regexTagLettre = new Regex("Lettre$");
@@ -56,6 +57,9 @@ namespace SAE1._01
         private int nbrVie = 3;
         // compteur pour animation/apparition
         private int compteur = 0;
+
+        // Random
+        Random random = new Random();
 
         // Test difficulté arcade
         bool diffArcade = false;
@@ -106,6 +110,7 @@ namespace SAE1._01
             #if DEBUG
                 Console.WriteLine("Touche appuyer: " + e.Key);
             #endif
+            // Regex
             Regex regexEnnemi = new Regex("^ennemi"+@e.Key);
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
@@ -135,18 +140,13 @@ namespace SAE1._01
         }
         private void CreationEnnemi()
         {
-            Random random = new Random();
-            int nbrRafraichissement = random.Next(30,51);
-
-            if (compteur % nbrRafraichissement == 0)
+            if (compteur % random.Next(30, 51) == 0)
             {
-                // Creation nouvel ennemi
-                Ennemi ennemi = new Ennemi(alpha[random.Next(0, 26)], Ennemi.TYPE_NORMAL);
-                int nbLettre = Array.IndexOf(alpha, ennemi.Lettre);
                 // Creation de la lettre
+                int nbLettre = random.Next(0, 26);
                 Rectangle lettre = new Rectangle
                 {
-                    Name = "ennemi" + ennemi.Lettre + "Lettre",
+                    Name = "ennemi" + alpha[nbLettre] + "Lettre",
                     Height = 45,
                     Width = 45,
                     Fill = lettreImg[nbLettre],
@@ -154,7 +154,7 @@ namespace SAE1._01
                 // Creation de l'ennemi
                 Rectangle nouvelEnnemi = new Rectangle
                 {
-                    Name = "ennemi" + ennemi.Lettre,
+                    Name = "ennemi" + alpha[nbLettre],
                     Tag = "ennemi0",
                     Height = 115,
                     Width = 60,
@@ -204,7 +204,6 @@ namespace SAE1._01
         }
         private void Jeu(object sender, EventArgs e)
         {
-            Random random = new Random();
             if (nbrVie <= 0)
                         {
                             // Si plus de vie stop le jeu
