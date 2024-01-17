@@ -19,6 +19,9 @@ namespace SAE1._01
     /// </summary>
     public partial class MenuDialog : Window
     {
+        public bool arcadeBool = false;
+        public bool normalBool = false;
+        public bool durBool = false;
         public MenuDialog()
         {
             InitializeComponent();
@@ -32,6 +35,36 @@ namespace SAE1._01
         private void Button_Click_Quitter(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
+        }
+
+        private void Arcade_Check(object sender, RoutedEventArgs e)
+        {
+            Dur.IsChecked = false;
+            Normal.IsChecked = false;
+            arcadeBool = true;
+            normalBool = false;
+            durBool = false;
+            Console.WriteLine(arcadeBool +  " " + normalBool + " " + durBool);
+        }
+
+        private void Normal_Check(object sender, RoutedEventArgs e)
+        {
+            Dur.IsChecked = false;
+            Arcade.IsChecked = false;
+            arcadeBool = false;
+            normalBool = true;
+            durBool = false;
+            Console.WriteLine(arcadeBool + " " + normalBool + " " + durBool);
+        }
+
+        private void Dur_Check(object sender, RoutedEventArgs e)
+        {
+            Arcade.IsChecked = false;
+            Normal.IsChecked = false;
+            arcadeBool = false;
+            normalBool = false;
+            durBool = true;
+            Console.WriteLine(arcadeBool + " " + normalBool + " " + durBool);
         }
     }
 }
