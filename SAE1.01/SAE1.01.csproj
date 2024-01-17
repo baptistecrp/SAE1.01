@@ -9,11 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="icon.png" />
     <None Remove="img\astro_arrow.cur" />
     <None Remove="img\astro_link.cur" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="icon.png" />
     <Resource Include="img\astro_arrow.cur">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
