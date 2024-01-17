@@ -9,10 +9,11 @@
     Width="800"
     Height="450"
     FocusManager.FocusedElement="{Binding ElementName=myCanvas}"
+    Icon="/icon.png"
     KeyUp="CanvasKeyIsUp"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d" Icon="/icon.png">
+    mc:Ignorable="d">
     <Canvas
         Name="myCanvas"
         Background="Black"

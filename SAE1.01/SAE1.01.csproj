@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="icon.png" />
+    <Resource Include="icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="img\astro_arrow.cur">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
