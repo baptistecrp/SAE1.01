@@ -20,6 +20,7 @@ namespace SAE1._01
     public partial class OptionDialog : Window
     {
         public bool pleinEcran = false;
+        public bool quitter = false;
         public OptionDialog()
         {
             InitializeComponent();
@@ -28,6 +29,12 @@ namespace SAE1._01
         private void PleinEcran_Check(object sender, RoutedEventArgs e)
         {
             pleinEcran = true;
+        }
+
+        private void quitterBouton_Click(object sender, RoutedEventArgs e)
+        {
+            quitter = true;
+            Close();
         }
     }
 }
