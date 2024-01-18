@@ -48,6 +48,36 @@
     <None Update="img\Bouton\jouerBouton\jouerBoutonNormal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="img\Bouton\modeArcadeBouton\modeArcadeBoutonClicker.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bouton\modeArcadeBouton\modeArcadeBoutonNormal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bouton\modeDifficileBouton\modeDifficileBoutonClicker.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bouton\modeDifficileBouton\modeDifficileBoutonNormal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bouton\modeNormalBouton\modeNormalBoutonClicker.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bouton\modeNormalBouton\modeNormalBoutonNormal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bouton\optionBouton\optionBoutonClicker.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bouton\optionBouton\optionBoutonNormal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bouton\quitterBouton\quitterBoutonClicker.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bouton\quitterBouton\quitterBoutonNormal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="img\C.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

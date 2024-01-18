@@ -83,6 +83,8 @@ namespace SAE1._01
 
         // Test difficulté arcade
         bool diffArcade = false;
+
+        private bool jeuEstLance = false;
         
         public MainWindow()
         {
@@ -92,25 +94,8 @@ namespace SAE1._01
             InitializeComponent();
             // Application du curseur personnalisé sur le canvas
             myCanvas.Cursor = curseur;
-            // Ouverture de la fenetre du menu
-            MenuDialog menu = new MenuDialog();
-            menu.ShowDialog();
-            if (menu.DialogResult == false) { Application.Current.Shutdown(); }
-            // Test difficulté dur
-            if (menu.durBool == true)
-            {
-                vitesseAnim /= 2.5;
-                vitesseEnnemi *= 2.5;
-            }
-            // Test difficulté arcade
-            if (menu.arcadeBool == true)
-            {
-                diffArcade = true;
-            }
-            if (menu.pleinEcran)
-            {
-                PleinEcran();
-            }
+            MenuPrincipale();
+            
             
             // Apparence du fond
             fond.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/fond.png")));
@@ -515,6 +500,29 @@ namespace SAE1._01
             FenetrePrincipale.WindowStyle = WindowStyle.SingleBorderWindow;
             RedimensionFenetre();
         }
+        private void MenuPrincipale()
+        {
+            // Ouverture de la fenetre du menu
+            MenuDialog menu = new MenuDialog();
+            menu.ShowDialog();
+            if (menu.option)
+            {
+                MenuOptions();
+            }
+            else if (menu.DialogResult == false) { Application.Current.Shutdown(); }
+            else if (menu.DialogResult == true) { jeuEstLance = true; }
+            // Test difficulté dur
+            if (menu.durBool == true)
+            {
+                vitesseAnim /= 2.5;
+                vitesseEnnemi *= 2.5;
+            }
+            // Test difficulté arcade
+            else if (menu.arcadeBool == true)
+            {
+                diffArcade = true;
+            }
+        }
         private void MenuPause()
         {
             PauseDialog menuPause = new PauseDialog();
@@ -532,7 +540,9 @@ namespace SAE1._01
             menuOptions.ShowDialog();
             if (menuOptions.pleinEcran) { PleinEcran(); }
             if (!menuOptions.pleinEcran) { Fenetre(); }
-            if (menuOptions.quitter) { MenuPause(); }
+            if (menuOptions.quitter && jeuEstLance) { MenuPause(); }
+            if (menuOptions.quitter && !jeuEstLance) { MenuPrincipale(); }
+
 
         }
     }

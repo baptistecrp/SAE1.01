@@ -22,11 +22,16 @@ namespace SAE1._01
         public bool arcadeBool = false;
         public bool normalBool = false;
         public bool durBool = false;
-        public bool pleinEcran = false;
+        public bool option = false;
         public MenuDialog()
         {
             InitializeComponent();
             jouerBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/jouerBouton/jouerBoutonNormal.png")));
+            quitterBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/quitterBouton/quitterBoutonNormal.png")));
+            modeArcadeBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeArcadeBouton/modeArcadeBoutonNormal.png")));
+            modeNormalBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeNormalBouton/modeNormalBoutonNormal.png")));
+            modeDifficileBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeDifficileBouton/modeDifficileBoutonNormal.png")));
+            optionBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/optionBouton/optionBoutonNormal.png")));
 
         }
 
@@ -40,44 +45,78 @@ namespace SAE1._01
             DialogResult = false;
         }
 
-        private void Arcade_Check(object sender, RoutedEventArgs e)
+
+        private void jouerBouton_MouseEnter(object sender, MouseEventArgs e)
         {
-            Dur.IsChecked = false;
-            Normal.IsChecked = false;
-            arcadeBool = true;
-            normalBool = false;
-            durBool = false;
-            Console.WriteLine(arcadeBool +  " " + normalBool + " " + durBool);
+            jouerBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/jouerBouton/jouerBoutonClicker.png")));
+
         }
 
-        private void Normal_Check(object sender, RoutedEventArgs e)
+        private void jouerBouton_MouseLeave(object sender, MouseEventArgs e)
         {
-            Dur.IsChecked = false;
-            Arcade.IsChecked = false;
-            arcadeBool = false;
-            normalBool = true;
-            durBool = false;
-            Console.WriteLine(arcadeBool + " " + normalBool + " " + durBool);
+            jouerBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/jouerBouton/jouerBoutonNormal.png")));
+
         }
 
-        private void Dur_Check(object sender, RoutedEventArgs e)
+        private void quitterBouton_MouseEnter(object sender, MouseEventArgs e)
         {
-            Arcade.IsChecked = false;
-            Normal.IsChecked = false;
+            quitterBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/quitterBouton/quitterBoutonClicker.png")));
+
+        }
+
+        private void quitterBouton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            quitterBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/quitterBouton/quitterBoutonNormal.png")));
+
+        }
+
+        private void modeDifficileBouton_Click(object sender, RoutedEventArgs e)
+        {
+            modeArcadeBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeArcadeBouton/modeArcadeBoutonNormal.png")));
+            modeNormalBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeNormalBouton/modeNormalBoutonNormal.png")));
+            modeDifficileBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeDifficileBouton/modeDifficileBoutonClicker.png")));
             arcadeBool = false;
             normalBool = false;
             durBool = true;
             Console.WriteLine(arcadeBool + " " + normalBool + " " + durBool);
         }
 
-        private void PleinEcran_Check(object sender, RoutedEventArgs e)
+        private void modeNormalBouton_Click(object sender, RoutedEventArgs e)
         {
-            pleinEcran = true;
+            modeArcadeBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeArcadeBouton/modeArcadeBoutonNormal.png")));
+            modeNormalBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeNormalBouton/modeNormalBoutonClicker.png")));
+            modeDifficileBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeDifficileBouton/modeDifficileBoutonNormal.png")));
+            arcadeBool = false;
+            normalBool = true;
+            durBool = false;
+            Console.WriteLine(arcadeBool + " " + normalBool + " " + durBool);
         }
 
-        private void jouerBouton_MouseDown(object sender, MouseButtonEventArgs e)
+        private void modeArcadeBouton_Click(object sender, RoutedEventArgs e)
         {
-            jouerBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/jouerBouton/jouerBoutonClicker.png")));
+            modeArcadeBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeArcadeBouton/modeArcadeBoutonClicker.png")));
+            modeNormalBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeNormalBouton/modeNormalBoutonNormal.png")));
+            modeDifficileBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeDifficileBouton/modeDifficileBoutonNormal.png")));
+            arcadeBool = true;
+            normalBool = false;
+            durBool = false;
+            Console.WriteLine(arcadeBool + " " + normalBool + " " + durBool);
+        }
+
+        private void optionBouton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            optionBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/optionBouton/optionBoutonClicker.png")));
+        }
+
+        private void optionBouton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            optionBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/optionBouton/optionBoutonNormal.png")));
+        }
+
+        private void optionBouton_Click(object sender, RoutedEventArgs e)
+        {
+            option = true;
+            Close();
         }
     }
 }

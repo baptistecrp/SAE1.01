@@ -13,44 +13,45 @@
     mc:Ignorable="d">
     <Grid>
         <Button x:Name="jouerBouton"
-            Width="100"
+            Width="96"
+            Height="32"
             Margin="0,0,150,20"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Click="Button_Click_Jouer"
-            Content="" MouseDown="jouerBouton_MouseDown" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"/>
-        <Button
-            Width="100"
+            Content="" MouseEnter="jouerBouton_MouseEnter" MouseLeave="jouerBouton_MouseLeave"  />
+
+        <Button x:Name="quitterBouton"
+            Width="96"
+            Height="32"
             Margin="150,0,0,20"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Click="Button_Click_Quitter"
-            Content="Quitter" />
-        <CheckBox
-            x:Name="Dur"
-            Width="100"
-            Margin="0,110,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Checked="Dur_Check"
-            Content="Mode Dur" />
-        <CheckBox
-            x:Name="Normal"
-            Width="100"
-            Margin="0,50,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Checked="Normal_Check"
-            Content="Mode Nomal" />
-        <CheckBox
-            x:Name="Arcade"
-            Width="100"
-            Margin="0,80,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Checked="Arcade_Check"
-            Content="Mode Arcade"
-            IsChecked="False" />
-        <CheckBox Content="Pleine Écran" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" IsChecked="False" Checked="PleinEcran_Check"/>
+            Content="" MouseEnter="quitterBouton_MouseEnter" MouseLeave="quitterBouton_MouseLeave" Cursor="Hand" />
+        <Button x:Name="modeArcadeBouton" Width="96" Height="32" Content="" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Click="modeArcadeBouton_Click"/>
+        <Button x:Name="modeNormalBouton" Width="96" Height="32" Content="" HorizontalAlignment="Center" Margin="0,87,0,0" VerticalAlignment="Top" Click="modeNormalBouton_Click"/>
+        <Button x:Name="modeDifficileBouton" Width="96" Height="32" Content="" HorizontalAlignment="Center" Margin="0,124,0,0" VerticalAlignment="Top" Click="modeDifficileBouton_Click"/>
+        <Button x:Name="optionBouton" Content="" Width="96" Height="32" HorizontalAlignment="Left" Margin="194,10,0,0" VerticalAlignment="Top" MouseEnter="optionBouton_MouseEnter" MouseLeave="optionBouton_MouseLeave" Click="optionBouton_Click"/>
     </Grid>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Transparent" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 </Window>
