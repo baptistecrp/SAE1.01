@@ -70,6 +70,8 @@ namespace SAE1._01
 
         // Son Ennemi
         private MediaPlayer sonEnnemi = new MediaPlayer();
+        private MediaPlayer sonJeu = new MediaPlayer();
+
 
         // Temps Ecoule Son Ennemi
         private int tempsEcouleSonEnnemi = 0;
@@ -115,6 +117,7 @@ namespace SAE1._01
             dispatcherTimer.Start();
             // Chargement son ennemi
             sonEnnemi.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/test.wav"));
+            sonJeu.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/test.wav"));
             // Creation de la liste des images de lettre
             for (int i = 0; i < alpha.Length; i++)
             {
@@ -258,7 +261,6 @@ namespace SAE1._01
                 {
                     // Deplacement
                     DeplacementEnnemi(y);
-                    y.Cursor = curseurClick;
 
                     // Test de collision avec joueur
                     if (ennemi.IntersectsWith(joueurRect))
@@ -449,7 +451,7 @@ namespace SAE1._01
             };
 
             Canvas.SetTop(bonus, random.Next(10,50));
-            Canvas.SetLeft(bonus, random.Next(10, (int)largeurFenetre)-10);
+            Canvas.SetLeft(bonus, random.Next((int)bonus.Width, (int)largeurFenetre)-(2*bonus.Width));
 
             // Disparition bonus précédent
             DisparitionBonus();
@@ -483,6 +485,14 @@ namespace SAE1._01
             FenetrePrincipale.WindowStyle = WindowStyle.None;
             RedimensionFenetre();
         }
+        private void Fenetre()
+        {
+            FenetrePrincipale.Width = 800;
+            FenetrePrincipale.Height = 450;
+            FenetrePrincipale.WindowState = WindowState.Normal;
+            FenetrePrincipale.WindowStyle = WindowStyle.SingleBorderWindow;
+            RedimensionFenetre();
+        }
         private void MenuPause()
         {
             PauseDialog menuPause = new PauseDialog();
@@ -499,6 +509,9 @@ namespace SAE1._01
             OptionDialog menuOptions = new OptionDialog();
             menuOptions.ShowDialog();
             if (menuOptions.pleinEcran) { PleinEcran(); }
+            if (!menuOptions.pleinEcran) { Fenetre(); }
+            if (menuOptions.quitter) { MenuPause(); }
+
         }
     }
 }
