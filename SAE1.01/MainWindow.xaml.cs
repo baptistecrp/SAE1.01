@@ -68,6 +68,9 @@ namespace SAE1._01
         // Son Ennemi
         private MediaPlayer sonEnnemi = new MediaPlayer();
 
+        // Temps Ecoule Son Ennemi
+        private int tempsEcouleSonEnnemi = 0;
+
         // Test difficulté arcade
         bool diffArcade = false;
         
@@ -134,6 +137,7 @@ namespace SAE1._01
                     elementASuppr.Add(y);
                     nbEnnemi++;
                     sonEnnemi.Play();
+                    tempsEcouleSonEnnemi = 0;
                 }
             }
             if (nbEnnemi == 0)
@@ -332,6 +336,15 @@ namespace SAE1._01
                 lettreJoueur.Visibility = Visibility.Hidden;
             }
             compteur++;
+
+            // Test temps ecoule son ennemi
+            tempsEcouleSonEnnemi++;
+
+            if (tempsEcouleSonEnnemi == 10)
+            {
+                sonEnnemi.Stop();
+                tempsEcouleSonEnnemi = 0;
+            }
         }
 
         public void Animation(ImageBrush[] listeImage, Rectangle rectangle, string nomAnim, int vitesse, bool repete)
@@ -388,6 +401,7 @@ namespace SAE1._01
             nbrScore = 0;
             nbrVie = 3;
             compteur = 0;
+            tempsEcouleSonEnnemi = 0;
             vitesseEnnemi = 0.5;
             vitesseAnim = 11;
             dispatcherTimer.Start();
