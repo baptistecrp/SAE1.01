@@ -23,6 +23,7 @@ namespace SAE1._01
         public bool relancer = false;
         public bool quitter = false;
         public bool reprendre = false;
+        public bool option = false;
         public PauseDialog()
         {
             InitializeComponent();
@@ -43,6 +44,12 @@ namespace SAE1._01
         private void reprendreBouton_Click(object sender, RoutedEventArgs e)
         {
             this.reprendre = true;
+            Close();
+        }
+
+        private void optionsBouton_Click(object sender, RoutedEventArgs e)
+        {
+            this.option = true;
             Close();
         }
     }

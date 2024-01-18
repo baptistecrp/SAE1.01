@@ -102,9 +102,7 @@ namespace SAE1._01
             }
             if (menu.pleinEcran)
             {
-                FenetrePrincipale.WindowState = WindowState.Maximized;
-
-                FenetrePrincipale.WindowStyle = WindowStyle.None;
+                PleinEcran();
             }
             
             // Apparence du fond
@@ -156,12 +154,8 @@ namespace SAE1._01
             }
             if (e.Key == Key.Escape)
             {
-                PauseDialog menuPause = new PauseDialog();
-                dispatcherTimer.Stop();
-                menuPause.ShowDialog();
-                if (menuPause.reprendre){dispatcherTimer.Start();}
-                if (menuPause.quitter) {Application.Current.Shutdown(); }
-                if (menuPause.relancer) { Relance(); }
+                MenuPause();
+                
             }
 
         }
@@ -481,6 +475,30 @@ namespace SAE1._01
             {
                 myCanvas.Children.Remove(bonus);
             }
+        }
+
+        private void PleinEcran()
+        {
+            FenetrePrincipale.WindowState = WindowState.Maximized;
+            FenetrePrincipale.WindowStyle = WindowStyle.None;
+            RedimensionFenetre();
+        }
+        private void MenuPause()
+        {
+            PauseDialog menuPause = new PauseDialog();
+            dispatcherTimer.Stop();
+            menuPause.ShowDialog();
+            if (menuPause.reprendre) { dispatcherTimer.Start(); }
+            if (menuPause.quitter) { Application.Current.Shutdown(); }
+            if (menuPause.relancer) { Relance(); }
+            if (menuPause.option) { MenuOptions(); }
+        }
+
+        private void MenuOptions()
+        {
+            OptionDialog menuOptions = new OptionDialog();
+            menuOptions.ShowDialog();
+            if (menuOptions.pleinEcran) { PleinEcran(); }
         }
     }
 }

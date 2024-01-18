@@ -10,6 +10,7 @@
         <Button x:Name="reprendreBouton" Content="Reprendre" HorizontalAlignment="Left" Margin="169,348,0,0" VerticalAlignment="Top" Click="reprendreBouton_Click"/>
         <Button x:Name="quitterBouton" Content="Quitter" HorizontalAlignment="Left" Margin="565,348,0,0" VerticalAlignment="Top" Click="quitterBouton_Click"/>
         <Button x:Name="relancerBouton" Content="Relancer" HorizontalAlignment="Left" Margin="410,358,0,0" VerticalAlignment="Top" Click="relancerBouton_Click"/>
+        <Button x:Name="optionsBouton" Content="Options" HorizontalAlignment="Left" Margin="410,266,0,0" VerticalAlignment="Top" Click="optionsBouton_Click"/>
 
     </Grid>
 </Window>
