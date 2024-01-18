@@ -51,6 +51,9 @@ namespace SAE1._01
         private ImageBrush[] animEnnemiMortDroite = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort3.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort4.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort5.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort6.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort7.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort8.png")))};
         private ImageBrush[] animJoueurStatique = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/joueurStatique/joueurStatique1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/joueurStatique/joueurStatique2.png"))) };
 
+        // Bonus
+        private Rectangle bonus = new Rectangle();
+
         // Curseur personnalisé
         private Cursor curseur = new Cursor(Application.GetResourceStream(new Uri("img/astro_arrow.cur", UriKind.Relative)).Stream);
         private Cursor curseurClick = new Cursor(Application.GetResourceStream(new Uri("img/astro_link.cur", UriKind.Relative)).Stream);
@@ -275,9 +278,21 @@ namespace SAE1._01
                         nbrScore--;
                     }
                 }
+
+                // Si le rectangle est un bonus
+                if (y is Rectangle && (string)y.Name == "bonus")
+                {
+                    y.Cursor = curseurClick;
+                }
             }
 
             CreationEnnemi();
+
+            // Creation bonus aléatoirement
+            if (compteur % random.Next(100,400) == 0)
+            {
+                ApparitionBonus();
+            }
 
             // Suppression des ennemis mort
             foreach (Rectangle y in elementASuppr)
@@ -428,6 +443,44 @@ namespace SAE1._01
             }
             largeurFenetre = largeurNouvelleFenetre;
             hauteurFenetre = hauteurNouvelleFenetre;
+        }
+        public void ApparitionBonus()
+        {
+            bonus = new Rectangle
+            {
+                Name = "bonus",
+                Height = 50 * multiplicateurY,
+                Width = 50 * multiplicateurX,
+                Fill = lettreImg[1],
+            };
+
+            Canvas.SetTop(bonus, random.Next(10,50));
+            Canvas.SetLeft(bonus, random.Next(10, (int)largeurFenetre)-10);
+
+            // Disparition bonus précédent
+            DisparitionBonus();
+
+            myCanvas.Children.Add(bonus);
+
+            bonus.MouseLeftButtonDown += clicBonus;
+        }
+
+        public void clicBonus(object sender, MouseButtonEventArgs e)
+        {
+            nbrScore += 100;
+
+            // Disparition immédiate du bonus
+            DisparitionBonus();
+        }
+
+        // Méthode pour gérer la disparition du bonus
+        private void DisparitionBonus()
+        {
+            // Suppression du bonus
+            if (bonus != null && myCanvas.Children.Contains(bonus))
+            {
+                myCanvas.Children.Remove(bonus);
+            }
         }
     }
 }
