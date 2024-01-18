@@ -70,6 +70,8 @@ namespace SAE1._01
 
         // Son Ennemi
         private MediaPlayer sonEnnemi = new MediaPlayer();
+
+        // Son jeu
         private MediaPlayer sonJeu = new MediaPlayer();
 
 
@@ -120,7 +122,7 @@ namespace SAE1._01
             dispatcherTimer.Start();
             // Chargement son ennemi
             sonEnnemi.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/test.wav"));
-            sonJeu.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/test.wav"));
+            sonJeu.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/musiqueFond.wav"));
             // Creation de la liste des images de lettre
             for (int i = 0; i < alpha.Length; i++)
             {
@@ -240,6 +242,13 @@ namespace SAE1._01
                             // Si plus de vie stop le jeu
                             dispatcherTimer.Stop();
                         }
+
+            // Si début jeu lancer son
+            if (compteur == 0)
+            {
+                sonJeu.Play();
+            }
+
             // Parcourt de tous les rectangles du canvas
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
