@@ -42,6 +42,12 @@
     <None Update="img\Background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="img\Bouton\jouerBouton\jouerBoutonClicker.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bouton\jouerBouton\jouerBoutonNormal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="img\C.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

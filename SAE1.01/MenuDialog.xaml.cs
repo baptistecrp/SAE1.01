@@ -26,6 +26,8 @@ namespace SAE1._01
         public MenuDialog()
         {
             InitializeComponent();
+            jouerBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/jouerBouton/jouerBoutonNormal.png")));
+
         }
 
         private void Button_Click_Jouer(object sender, RoutedEventArgs e)
@@ -71,6 +73,11 @@ namespace SAE1._01
         private void PleinEcran_Check(object sender, RoutedEventArgs e)
         {
             pleinEcran = true;
+        }
+
+        private void jouerBouton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            jouerBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/jouerBouton/jouerBoutonClicker.png")));
         }
     }
 }

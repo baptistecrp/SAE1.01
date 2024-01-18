@@ -12,13 +12,13 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
-        <Button
+        <Button x:Name="jouerBouton"
             Width="100"
             Margin="0,0,150,20"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Click="Button_Click_Jouer"
-            Content="Jouer" />
+            Content="" MouseDown="jouerBouton_MouseDown" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"/>
         <Button
             Width="100"
             Margin="150,0,0,20"
