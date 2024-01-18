@@ -74,6 +74,9 @@ namespace SAE1._01
         // Temps Ecoule Son Ennemi
         private int tempsEcouleSonEnnemi = 0;
 
+        // Temps Ecoule Bonus
+        private int tempsEcouleBonus = 0;
+
         // Test difficulté arcade
         bool diffArcade = false;
         
@@ -358,6 +361,13 @@ namespace SAE1._01
                 sonEnnemi.Stop();
                 tempsEcouleSonEnnemi = 0;
             }
+
+            // Test temps ecoule bonus
+            tempsEcouleBonus++;
+            if (tempsEcouleBonus == 90)
+            {
+                DisparitionBonus();
+            }
         }
 
         public void Animation(ImageBrush[] listeImage, Rectangle rectangle, string nomAnim, int vitesse, bool repete)
@@ -456,6 +466,8 @@ namespace SAE1._01
                 myCanvas.Children.Add(bonus);
 
                 bonus.MouseLeftButtonDown += clicBonus;
+
+                tempsEcouleBonus = 0;
             }
         }
 
@@ -474,6 +486,7 @@ namespace SAE1._01
             if (bonus != null && myCanvas.Children.Contains(bonus))
             {
                 myCanvas.Children.Remove(bonus);
+                tempsEcouleBonus = 0;
             }
         }
 
