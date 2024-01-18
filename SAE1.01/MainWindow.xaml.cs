@@ -103,6 +103,7 @@ namespace SAE1._01
 
                 FenetrePrincipale.WindowStyle = WindowStyle.None;
             }
+            
             // Apparence du fond
             fond.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/fond.png")));
             // Configuration du timer
@@ -119,12 +120,10 @@ namespace SAE1._01
                 lettreImg[i] = new ImageBrush();
                 lettreImg[i].ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/" + alpha[i] + ".png"));
             }
-            // Creation Ennemi
-            CreationEnnemi();
         }
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
         {
-            int nbEnnemi = 0;
+            bool ennemiTuer = false;
             #if DEBUG
                 Console.WriteLine("Touche appuyer: " + e.Key);
             #endif
@@ -135,12 +134,12 @@ namespace SAE1._01
                 if (regexEnnemi.IsMatch((string)y.Name+e.Key))
                 {
                     elementASuppr.Add(y);
-                    nbEnnemi++;
+                    ennemiTuer = true;
                     sonEnnemi.Play();
                     tempsEcouleSonEnnemi = 0;
                 }
             }
-            if (nbEnnemi == 0)
+            if (!ennemiTuer && e.Key != Key.Escape)
             {
                 nbrScore -= 2;
             }
@@ -152,9 +151,14 @@ namespace SAE1._01
                     lettreJoueur.Fill = lettreImg[i];
                 }
             }
-            if (e.Key == Key.Enter)
+            if (e.Key == Key.Escape)
             {
-                Relance();
+                PauseDialog menuPause = new PauseDialog();
+                dispatcherTimer.Stop();
+                menuPause.ShowDialog();
+                if (menuPause.reprendre){dispatcherTimer.Start();}
+                if (menuPause.quitter) {Application.Current.Shutdown(); }
+                if (menuPause.relancer) { Relance(); }
             }
 
         }
