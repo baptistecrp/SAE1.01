@@ -95,7 +95,7 @@ namespace SAE1._01
             // Application du curseur personnalisé sur le canvas
             myCanvas.Cursor = curseur;
             MenuPrincipale();
-            
+
             
             // Apparence du fond
             fond.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/fond.png")));
@@ -435,12 +435,13 @@ namespace SAE1._01
             {
                 multiplicateurX = largeurFenetre/800;
                 multiplicateurY = hauteurFenetre/450;
-                Console.WriteLine(multiplicateurX + " " + multiplicateurY);
+                Console.WriteLine(largeurFenetre+ " "+ largeurNouvelleFenetre + " " + largeurNouvelleFenetre * (vitesseEnnemi / largeurFenetre));
                 y.Width = largeurNouvelleFenetre * (y.Width / largeurFenetre);
                 y.Height = hauteurNouvelleFenetre * (y.Height / hauteurFenetre);
                 Canvas.SetLeft(y, largeurNouvelleFenetre * (Canvas.GetLeft(y) / largeurFenetre));
                 Canvas.SetTop(y, hauteurNouvelleFenetre * (Canvas.GetTop(y) / hauteurFenetre));
             }
+            vitesseEnnemi = largeurNouvelleFenetre * (vitesseEnnemi / largeurFenetre);
             largeurFenetre = largeurNouvelleFenetre;
             hauteurFenetre = hauteurNouvelleFenetre;
         }
