@@ -446,23 +446,23 @@ namespace SAE1._01
         }
         public void ApparitionBonus()
         {
-            bonus = new Rectangle
+            if (!myCanvas.Children.Contains(bonus))
             {
-                Name = "bonus",
-                Height = 50 * multiplicateurY,
-                Width = 50 * multiplicateurX,
-                Fill = lettreImg[1],
-            };
+                bonus = new Rectangle
+                {
+                    Name = "bonus",
+                    Height = 50 * multiplicateurY,
+                    Width = 50 * multiplicateurX,
+                    Fill = lettreImg[1],
+                };
 
-            Canvas.SetTop(bonus, random.Next(10,50));
-            Canvas.SetLeft(bonus, random.Next(10, (int)largeurFenetre)-10);
+                Canvas.SetTop(bonus, random.Next(10,50));
+                Canvas.SetLeft(bonus, random.Next(10, (int)largeurFenetre)-10);
 
-            // Disparition bonus précédent
-            DisparitionBonus();
+                myCanvas.Children.Add(bonus);
 
-            myCanvas.Children.Add(bonus);
-
-            bonus.MouseLeftButtonDown += clicBonus;
+                bonus.MouseLeftButtonDown += clicBonus;
+            }
         }
 
         public void clicBonus(object sender, MouseButtonEventArgs e)
