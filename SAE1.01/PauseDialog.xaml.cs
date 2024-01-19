@@ -27,6 +27,8 @@ namespace SAE1._01
         public PauseDialog()
         {
             InitializeComponent();
+            optionBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/optionBouton/optionBoutonNormal.png")));
+            quitterBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/quitterBouton/quitterBoutonNormal.png")));
         }
 
         private void relancerBouton_Click(object sender, RoutedEventArgs e)
@@ -51,6 +53,26 @@ namespace SAE1._01
         {
             this.option = true;
             Close();
+        }
+        private void quitterBouton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            quitterBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/quitterBouton/quitterBoutonClicker.png")));
+
+        }
+
+        private void quitterBouton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            quitterBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/quitterBouton/quitterBoutonNormal.png")));
+
+        }
+        private void optionBouton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            optionBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/optionBouton/optionBoutonClicker.png")));
+        }
+
+        private void optionBouton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            optionBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/optionBouton/optionBoutonNormal.png")));
         }
     }
 }

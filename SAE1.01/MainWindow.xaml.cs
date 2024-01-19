@@ -100,6 +100,7 @@ namespace SAE1._01
             FenetrePrincipale.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./font/#pixelmix");
 
             // Apparence du fond
+            solHerbe.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/solHerbe.png")));
             fond.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/fond.png")));
             // Configuration du timer
             dispatcherTimer.Tick += Jeu;
@@ -467,8 +468,8 @@ namespace SAE1._01
                     Fill = lettreImg[1],
                 };
 
-                Canvas.SetTop(bonus, random.Next(10,50));
-                Canvas.SetLeft(bonus, random.Next(10, (int)largeurFenetre)-10);
+                Canvas.SetTop(bonus, random.Next((int)bonus.Height, (int)Canvas.GetTop(lettreJoueur)-(int)bonus.Height));
+                Canvas.SetLeft(bonus, random.Next((int)bonus.Width, (int)largeurFenetre)-bonus.Width);
 
                 myCanvas.Children.Add(bonus);
 

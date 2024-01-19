@@ -24,6 +24,8 @@ namespace SAE1._01
         public OptionDialog()
         {
             InitializeComponent();
+            quitterBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/quitterBouton/quitterBoutonNormal.png")));
+
         }
 
         private void PleinEcran_Check(object sender, RoutedEventArgs e)
@@ -35,6 +37,25 @@ namespace SAE1._01
         {
             quitter = true;
             Close();
+            Console.WriteLine(pleinEcran);
+
         }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            pleinEcran = false;
+        }
+        private void quitterBouton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            quitterBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/quitterBouton/quitterBoutonClicker.png")));
+
+        }
+
+        private void quitterBouton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            quitterBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/quitterBouton/quitterBoutonNormal.png")));
+
+        }
+
     }
 }

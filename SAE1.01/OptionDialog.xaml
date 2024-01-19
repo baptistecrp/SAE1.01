@@ -6,25 +6,49 @@
     xmlns:local="clr-namespace:SAE1._01"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="OptionDialog"
-    Width="800"
-    Height="450"
+    Width="500"
+    Height="500"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d" WindowStyle="None">
+    mc:Ignorable="d" WindowStyle="None" Icon="/icon.png">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/fond.png" Stretch="UniformToFill"/>
+        </Grid.Background>
         <CheckBox
             Margin="0,44,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Checked="PleinEcran_Check"
             Content="Plein Écran"
-            IsChecked="False" />
+            IsChecked="False" Unchecked="CheckBox_Unchecked" />
         <Button
             x:Name="quitterBouton"
+            Width="144" Height="48"
             Margin="0,387,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Click="quitterBouton_Click"
-            Content="Quitter" />
+            Content="" MouseEnter="quitterBouton_MouseEnter" MouseLeave="quitterBouton_MouseLeave" />
 
     </Grid>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Transparent" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 </Window>

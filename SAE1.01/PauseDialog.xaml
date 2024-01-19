@@ -6,39 +6,65 @@
     xmlns:local="clr-namespace:SAE1._01"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="PauseDialog"
-    Width="800"
-    Height="450"
+    Width="500"
+    Height="500"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d" WindowStyle="None">
+    mc:Ignorable="d" WindowStyle="None" Icon="/icon.png">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/fond.png" Stretch="UniformToFill"/>
+        </Grid.Background>
         <Button
             x:Name="reprendreBouton"
-            Margin="169,348,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
+            Width="144" Height="48"
+            Margin="0,0,0,250"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
             Click="reprendreBouton_Click"
             Content="Reprendre" />
         <Button
             x:Name="quitterBouton"
-            Margin="565,348,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
+            Margin="0,200,0,0"
+            Width="144" Height="48"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
             Click="quitterBouton_Click"
-            Content="Quitter" />
+            Content="" MouseEnter="quitterBouton_MouseEnter" MouseLeave="quitterBouton_MouseLeave" />
         <Button
             x:Name="relancerBouton"
-            Margin="410,358,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
+            Width="144" Height="48"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
             Click="relancerBouton_Click"
-            Content="Relancer" />
+            Content="Relancer" Margin="0,50,0,0" />
         <Button
-            x:Name="optionsBouton"
-            Margin="410,266,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
+            x:Name="optionBouton"
+            Margin="0,0,0,100"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Width="144" Height="48"
             Click="optionsBouton_Click"
-            Content="Options" />
+            Content="" MouseEnter="optionBouton_MouseEnter" MouseLeave="optionBouton_MouseLeave" />
 
     </Grid>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Transparent" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 </Window>

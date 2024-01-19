@@ -28,7 +28,7 @@
         <Rectangle
             Name="joueur"
             Canvas.Left="372"
-            Canvas.Top="245"
+            Canvas.Top="238"
             Width="64"
             Height="112"
             HorizontalAlignment="Center"
@@ -62,18 +62,7 @@
         <Rectangle
             x:Name="flamme"
             Canvas.Left="346"
-            Canvas.Top="256"
-            Width="60"
-            Height="60"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Panel.ZIndex="1"
-            Fill="#FFFF0808"
-            Tag="flamme0" />
-        <Rectangle
-            x:Name="flamme_Copy"
-            Canvas.Left="403"
-            Canvas.Top="258"
+            Canvas.Top="249"
             Width="60"
             Height="60"
             HorizontalAlignment="Center"
@@ -81,5 +70,17 @@
             Panel.ZIndex="1"
             Fill="#FFFF0808"
             Tag="flamme0" />
+        <Rectangle
+            x:Name="flamme_Copy"
+            Canvas.Left="403"
+            Canvas.Top="251"
+            Width="60"
+            Height="60"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="1"
+            Fill="#FFFF0808"
+            Tag="flamme0" />
+        <Rectangle x:Name="solHerbe" Height="110" Width="800" Canvas.Left="0" Canvas.Top="340" Panel.ZIndex="1" />
     </Canvas>
 </Window>
