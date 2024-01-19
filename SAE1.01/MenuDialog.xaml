@@ -10,7 +10,7 @@
     Height="500"
     WindowStyle="None"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d" Icon="/icon.png">
+    mc:Ignorable="d" Icon="/icon.png" ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/fond.png" Stretch="UniformToFill"/>

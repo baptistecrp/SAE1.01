@@ -446,7 +446,7 @@ namespace SAE1._01
             {
                 multiplicateurX = largeurFenetre/800;
                 multiplicateurY = hauteurFenetre/450;
-                Console.WriteLine(largeurFenetre+ " "+ largeurNouvelleFenetre + " " + largeurNouvelleFenetre * (vitesseEnnemi / largeurFenetre));
+                Console.WriteLine(largeurFenetre+ " "+ hauteurFenetre);
                 y.Width = largeurNouvelleFenetre * (y.Width / largeurFenetre);
                 y.Height = hauteurNouvelleFenetre * (y.Height / hauteurFenetre);
                 Canvas.SetLeft(y, largeurNouvelleFenetre * (Canvas.GetLeft(y) / largeurFenetre));
