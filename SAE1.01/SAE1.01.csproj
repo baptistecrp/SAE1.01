@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="font\PixelDart.ttf" />
     <None Remove="font\pixelmix.ttf" />
     <None Remove="icon.png" />
     <None Remove="img\astro_arrow.cur" />
@@ -17,9 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="font\PixelDart.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="font\pixelmix.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
