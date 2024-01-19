@@ -42,7 +42,6 @@ namespace SAE1._01
         private String[] alpha = new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
         // liste élément à supprimer
         private List<Rectangle> elementASuppr = new List<Rectangle>() ;
-        private List<Rectangle> animASuppr = new List<Rectangle>();
         private ImageBrush[] animLettreDisparition = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/lettreDisparition/lettreDisparition1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/lettreDisparition/lettreDisparition2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/lettreDisparition/lettreDisparition3.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/lettreDisparition/lettreDisparition4.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/lettreDisparition/lettreDisparition5.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/lettreDisparition/lettreDisparition6.png"))) };
         private ImageBrush[] animEnnemiMarche = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche3.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche4.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche5.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche6.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche7.png"))) , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche8.png")))  , new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarche/ennemiMarche9.png"))) };
         private ImageBrush[] animEnnemiMarcheDroite = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche3.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche4.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche5.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche6.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche7.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche8.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMarcheDroite/ennemiMarche9.png"))) };
@@ -84,6 +83,7 @@ namespace SAE1._01
         // Test difficulté arcade
         bool diffArcade = false;
 
+        // Pour menu
         private bool jeuEstLance = false;
         
         public MainWindow()
@@ -114,6 +114,65 @@ namespace SAE1._01
                 lettreImg[i] = new ImageBrush();
                 lettreImg[i].ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/" + alpha[i] + ".png"));
             }
+        }
+        private void Jeu(object sender, EventArgs e)
+        {
+            Console.WriteLine("Temps Bonus " + tempsEcouleBonus);
+            CreationEnnemi();
+            RedimensionFenetre();
+            GestionElementASupprimer();
+            GestionTemps();
+            if (nbrVie <= 0)
+            {
+                // Si plus de vie stop le jeu
+                dispatcherTimer.Stop();
+            }
+
+            // Si début jeu lancer son
+            if (compteur == 0)
+            {
+                sonJeu.Play();
+            }
+
+            // Parcourt de tous les rectangles du canvas
+            foreach (var y in myCanvas.Children.OfType<Rectangle>())
+            {
+
+                Animation(animEnnemiMarche, y, "ennemi", (int)vitesseAnim , true);
+                Animation(animEnnemiMarcheDroite, y, "ennemiDroite", (int)vitesseAnim, true);
+                Animation(animEnnemiMortDroite, y, "mortDroite", 2, false);
+                Animation(animEnnemiMort, y, "mort", 2, false);
+                Animation(animLettreDisparition, y, "lettreSuppr", 2, false);
+                Animation(animJoueurStatique, y, "joueur", 10, true);
+                Animation(animFlamme, y, "flamme", 3, true);
+
+                GestionEnnemi(y);
+
+
+                
+
+                // Si le rectangle est un bonus
+                if (y is Rectangle && (string)y.Name == "bonus")
+                {
+                    y.Cursor = curseurClick;
+                }
+            }
+            // Creation bonus aléatoirement
+            if (tempsEcouleBonus >= random.Next(1250,3000))
+            {
+                ApparitionBonus();
+            }
+
+            
+            
+            
+            // Changement label score
+            score.Content = "Score: " + nbrScore;
+
+            // Changement label vie
+            vieRestante.Content = "Vie Restante: " + nbrVie;
+
+            
         }
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
         {
@@ -198,7 +257,7 @@ namespace SAE1._01
                     #endif
 
                     // Modification vitesse animation
-                    vitesseAnim *= 0.990;
+                    vitesseAnim *= 0.995;
                     #if DEBUG
                         Console.WriteLine("Vitesse Animation: " + vitesseAnim);
                     #endif
@@ -213,136 +272,14 @@ namespace SAE1._01
                 Canvas.SetLeft(ennemi, Canvas.GetLeft(ennemi) + vitesseEnnemi);
             }
             // Deplacement vers la gauche des ennemis à droite
-            if (Canvas.GetLeft(ennemi) > Canvas.GetLeft(joueur)+joueur.Width)
+            else if (Canvas.GetLeft(ennemi) > Canvas.GetLeft(joueur)+joueur.Width)
             {
                 Canvas.SetLeft(ennemi, Canvas.GetLeft(ennemi) - vitesseEnnemi);
             }
 
         }
-        private void Jeu(object sender, EventArgs e)
+        public void GestionTemps()
         {
-            Console.WriteLine("Temps Bonus " + tempsEcouleBonus);
-            RedimensionFenetre();
-            if (nbrVie <= 0)
-                        {
-                            // Si plus de vie stop le jeu
-                            dispatcherTimer.Stop();
-                        }
-
-            // Si début jeu lancer son
-            if (compteur == 0)
-            {
-                sonJeu.Play();
-            }
-
-            // Parcourt de tous les rectangles du canvas
-            foreach (var y in myCanvas.Children.OfType<Rectangle>())
-            {
-
-                Animation(animEnnemiMarche, y, "ennemi", (int)vitesseAnim , true);
-                Animation(animEnnemiMarcheDroite, y, "ennemiDroite", (int)vitesseAnim, true);
-                Animation(animEnnemiMortDroite, y, "mortDroite", 2, false);
-                Animation(animEnnemiMort, y, "mort", 2, false);
-                Animation(animLettreDisparition, y, "lettreSuppr", 2, false);
-                Animation(animJoueurStatique, y, "joueur", 10, true);
-                Animation(animFlamme, y, "flamme", 3, true);
-                
-
-
-
-                // Rect pour gérer colision
-                Rect ennemi = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
-                Rect joueurRect = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
-
-                // Si le rectangle est un ennemi
-                if (y is Rectangle && regexTagToutEnnemi.IsMatch((string)y.Name))
-                {
-                    // Deplacement
-                    DeplacementEnnemi(y);
-
-                    // Test de collision avec joueur
-                    if (ennemi.IntersectsWith(joueurRect))
-                    {
-                        // Si encore de vie on retire une vie + suppression de l'ennemi + score -1
-                        if (regexTagEnnemi.IsMatch((string)y.Name))
-                        {
-                                nbrVie--;
-                        }
-                        elementASuppr.Add(y);
-                        nbrScore--;
-                    }
-                }
-
-                // Si le rectangle est un bonus
-                if (y is Rectangle && (string)y.Name == "bonus")
-                {
-                    y.Cursor = curseurClick;
-                }
-            }
-
-            CreationEnnemi();
-
-            // Creation bonus aléatoirement
-            if (tempsEcouleBonus >= random.Next(1250,3000))
-            {
-                ApparitionBonus();
-            }
-
-            // Suppression des ennemis mort
-            foreach (Rectangle y in elementASuppr)
-            {
-                if (regexTagLettre.IsMatch(y.Name))
-                {
-                    Rectangle rectangleLettreSuppr = new Rectangle
-                    {
-                        Tag = "lettreSuppr0",
-                        Name = "lettreSuppr",
-                        Width = 45*multiplicateurX,
-                        Height = 39*multiplicateurY,
-                    };
-                    myCanvas.Children.Add(rectangleLettreSuppr);
-                    Canvas.SetTop(rectangleLettreSuppr, Canvas.GetTop(y));
-                    Canvas.SetLeft(rectangleLettreSuppr, Canvas.GetLeft(y));
-
-                }
-                else if (regexTagEnnemi.IsMatch(y.Name))
-                {
-
-                    Rectangle rectangleMort = new Rectangle
-                    {
-                        Tag = "mort0",
-                        Name = "mort",
-                        Width = 140*multiplicateurX,
-                        Height = 165*multiplicateurY,
-                    };
-                    if (Canvas.GetLeft(y) > Canvas.GetLeft(joueur) + joueur.Width)
-                    {
-                        rectangleMort.Tag = "mortDroite0";
-                        Canvas.SetTop(rectangleMort, Canvas.GetTop(y) - (rectangleMort.Height - y.Height));
-                        Canvas.SetLeft(rectangleMort, Canvas.GetLeft(y));
-                    }
-                    else
-                    {
-                        Canvas.SetTop(rectangleMort, Canvas.GetTop(y) - (rectangleMort.Height - y.Height));
-                        Canvas.SetLeft(rectangleMort, Canvas.GetLeft(y) + (y.Width-rectangleMort.Width));
-                        Console.WriteLine(Canvas.GetLeft(y));
-                    }
-                    myCanvas.Children.Add(rectangleMort);
-                    nbrScore++;
-                }
-                myCanvas.Children.Remove(y);
-                
-                
-            }
-            // vidage de la liste des elements a supprimer pour optimiser
-            elementASuppr.Clear();
-            
-            // Changement label score
-            score.Content = "Score: " + nbrScore;
-
-            // Changement label vie
-            vieRestante.Content = "Vie Restante: " + nbrVie;
-
             // Cacher lettre au dessus joueur
             if (compteur % 40 == 0)
             {
@@ -366,7 +303,82 @@ namespace SAE1._01
                 DisparitionBonus();
             }
         }
+        public void GestionEnnemi(Rectangle y)
+        {
+            // Rect pour gérer colision
+            Rect joueurRect = new Rect(Canvas.GetLeft(joueur), Canvas.GetTop(joueur), joueur.Width, joueur.Height);
 
+            // Si le rectangle est un ennemi
+            if (y is Rectangle && regexTagToutEnnemi.IsMatch((string)y.Name))
+            {
+                // creation rect pour collision
+                Rect ennemi = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
+
+                // Deplacement
+                DeplacementEnnemi(y);
+
+                // Test de collision avec joueur
+                if (ennemi.IntersectsWith(joueurRect))
+                {
+                    // Si encore de vie on retire une vie + suppression de l'ennemi + score -1
+                    if (regexTagEnnemi.IsMatch((string)y.Name))
+                    {
+                        nbrVie--;
+                    }
+                    elementASuppr.Add(y);
+                    nbrScore--;
+                }
+            }
+        }
+        public void GestionElementASupprimer()
+        {
+            foreach (Rectangle y in elementASuppr)
+            {
+                // Suppression des ennemis mort
+                if (regexTagLettre.IsMatch(y.Name))
+                {
+                    Rectangle rectangleLettreSuppr = new Rectangle
+                    {
+                        Tag = "lettreSuppr0",
+                        Name = "lettreSuppr",
+                        Width = 45 * multiplicateurX,
+                        Height = 39 * multiplicateurY,
+                    };
+                    myCanvas.Children.Add(rectangleLettreSuppr);
+                    Canvas.SetTop(rectangleLettreSuppr, Canvas.GetTop(y));
+                    Canvas.SetLeft(rectangleLettreSuppr, Canvas.GetLeft(y));
+
+                }
+                else if (regexTagEnnemi.IsMatch(y.Name))
+                {
+
+                    Rectangle rectangleMort = new Rectangle
+                    {
+                        Tag = "mort0",
+                        Name = "mort",
+                        Width = 140 * multiplicateurX,
+                        Height = 165 * multiplicateurY,
+                    };
+                    if (Canvas.GetLeft(y) > Canvas.GetLeft(joueur) + joueur.Width)
+                    {
+                        rectangleMort.Tag = "mortDroite0";
+                        Canvas.SetTop(rectangleMort, Canvas.GetTop(y) - (rectangleMort.Height - y.Height));
+                        Canvas.SetLeft(rectangleMort, Canvas.GetLeft(y));
+                    }
+                    else
+                    {
+                        Canvas.SetTop(rectangleMort, Canvas.GetTop(y) - (rectangleMort.Height - y.Height));
+                        Canvas.SetLeft(rectangleMort, Canvas.GetLeft(y) + (y.Width - rectangleMort.Width));
+                        Console.WriteLine(Canvas.GetLeft(y));
+                    }
+                    myCanvas.Children.Add(rectangleMort);
+                    nbrScore++;
+                }
+                myCanvas.Children.Remove(y);
+            }
+            // vidage de la liste des elements a supprimer pour optimiser
+            elementASuppr.Clear();
+        }
         public void Animation(ImageBrush[] listeImage, Rectangle rectangle, string nomAnim, int vitesse, bool repete)
         {
             // Si repete est true lorsqu'on est à la dernière image on reviens à la première
@@ -422,6 +434,7 @@ namespace SAE1._01
             nbrVie = 3;
             compteur = 0;
             tempsEcouleSonEnnemi = 0;
+            tempsEcouleBonus = 0;
             vitesseEnnemi = 0.5;
             vitesseAnim = 11;
             dispatcherTimer.Start();

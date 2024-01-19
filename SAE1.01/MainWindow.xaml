@@ -39,7 +39,7 @@
             Tag="joueur0" />
         <Label
             x:Name="score"
-            Canvas.Left="688"
+            Canvas.Right="10"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Panel.ZIndex="1"
