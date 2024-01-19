@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAE1._01"
         mc:Ignorable="d"
-        Title="OptionDialog" Height="450" Width="800">
+        Title="OptionDialog" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <CheckBox Content="Pleine Écran" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,44,0,0" IsChecked="False" Checked="PleinEcran_Check"/>
         <Button x:Name="quitterBouton" Content="Quitter" HorizontalAlignment="Center" Margin="0,387,0,0" VerticalAlignment="Top" Click="quitterBouton_Click"/>

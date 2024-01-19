@@ -1,16 +1,44 @@
-﻿<Window x:Class="SAE1._01.PauseDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SAE1._01"
-        mc:Ignorable="d"
-        Title="PauseDialog" Height="450" Width="800">
+﻿<Window
+    x:Class="SAE1._01.PauseDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SAE1._01"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="PauseDialog"
+    Width="800"
+    Height="450"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Grid>
-        <Button x:Name="reprendreBouton" Content="Reprendre" HorizontalAlignment="Left" Margin="169,348,0,0" VerticalAlignment="Top" Click="reprendreBouton_Click"/>
-        <Button x:Name="quitterBouton" Content="Quitter" HorizontalAlignment="Left" Margin="565,348,0,0" VerticalAlignment="Top" Click="quitterBouton_Click"/>
-        <Button x:Name="relancerBouton" Content="Relancer" HorizontalAlignment="Left" Margin="410,358,0,0" VerticalAlignment="Top" Click="relancerBouton_Click"/>
-        <Button x:Name="optionsBouton" Content="Options" HorizontalAlignment="Left" Margin="410,266,0,0" VerticalAlignment="Top" Click="optionsBouton_Click"/>
+        <Button
+            x:Name="reprendreBouton"
+            Margin="169,348,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="reprendreBouton_Click"
+            Content="Reprendre" />
+        <Button
+            x:Name="quitterBouton"
+            Margin="565,348,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="quitterBouton_Click"
+            Content="Quitter" />
+        <Button
+            x:Name="relancerBouton"
+            Margin="410,358,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="relancerBouton_Click"
+            Content="Relancer" />
+        <Button
+            x:Name="optionsBouton"
+            Margin="410,266,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="optionsBouton_Click"
+            Content="Options" />
 
     </Grid>
 </Window>

@@ -29,10 +29,10 @@
             VerticalAlignment="Bottom"
             Click="Button_Click_Quitter"
             Content="" MouseEnter="quitterBouton_MouseEnter" MouseLeave="quitterBouton_MouseLeave" Cursor="Hand" />
-        <Button x:Name="modeArcadeBouton" Width="96" Height="32" Content="" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Top" Click="modeArcadeBouton_Click"/>
-        <Button x:Name="modeNormalBouton" Width="96" Height="32" Content="" HorizontalAlignment="Center" Margin="0,87,0,0" VerticalAlignment="Top" Click="modeNormalBouton_Click"/>
-        <Button x:Name="modeDifficileBouton" Width="96" Height="32" Content="" HorizontalAlignment="Center" Margin="0,124,0,0" VerticalAlignment="Top" Click="modeDifficileBouton_Click"/>
-        <Button x:Name="optionBouton" Content="" Width="96" Height="32" HorizontalAlignment="Left" Margin="194,10,0,0" VerticalAlignment="Top" MouseEnter="optionBouton_MouseEnter" MouseLeave="optionBouton_MouseLeave" Click="optionBouton_Click"/>
+        <Button x:Name="modeArcadeBouton" Width="96" Height="32" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Click="modeArcadeBouton_Click" Margin="0,0,0,75"/>
+        <Button x:Name="modeNormalBouton" Width="96" Height="32" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Click="modeNormalBouton_Click"/>
+        <Button x:Name="modeDifficileBouton" Width="96" Height="32" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" Click="modeDifficileBouton_Click" Margin="0,75,0,0" Cursor="Hand"/>
+        <Button x:Name="optionBouton" Content="" Width="96" Height="32" HorizontalAlignment="Left" Margin="175,10,0,0" VerticalAlignment="Top" MouseEnter="optionBouton_MouseEnter" MouseLeave="optionBouton_MouseLeave" Click="optionBouton_Click"/>
     </Grid>
     <Window.Resources>
         <Style TargetType="Button">
