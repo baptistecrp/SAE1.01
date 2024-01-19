@@ -112,7 +112,11 @@ namespace SAE1._01
             dispatcherTimer.Start();
             // Chargement son ennemi
             sonEnnemi.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/test.wav"));
-            sonJeu.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/musiqueFond.wav"));
+            sonJeu.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/test.wav"));
+            // Lancement sonJeu
+            sonJeu.Play();
+            // Gestion de l'événement MediaEnded pour la boucle de la musique de fond
+            sonJeu.MediaEnded += SonJeuFini;
             // Creation de la liste des images de lettre
             for (int i = 0; i < alpha.Length; i++)
             {
@@ -131,12 +135,6 @@ namespace SAE1._01
             {
                 // Si plus de vie stop le jeu
                 dispatcherTimer.Stop();
-            }
-
-            // Si début jeu lancer son
-            if (compteur == 0)
-            {
-                sonJeu.Play();
             }
 
             // Parcourt de tous les rectangles du canvas
@@ -509,6 +507,13 @@ namespace SAE1._01
                 myCanvas.Children.Remove(bonus);
                 tempsEcouleBonus = 0;
             }
+        }
+
+        // Rembobiner et rejouer la musique de fond
+        private void SonJeuFini(object sender, EventArgs e)
+        {
+            sonJeu.Position = TimeSpan.Zero;
+            sonJeu.Play();
         }
 
         private void PleinEcran()
