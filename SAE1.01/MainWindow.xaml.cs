@@ -112,7 +112,7 @@ namespace SAE1._01
             dispatcherTimer.Start();
             // Chargement son ennemi
             sonEnnemi.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/test.wav"));
-            sonJeu.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/test.wav"));
+            sonJeu.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/musiqueFond.wav"));
             // Lancement sonJeu
             sonJeu.Play();
             // Gestion de l'événement MediaEnded pour la boucle de la musique de fond
