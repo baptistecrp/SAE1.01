@@ -80,6 +80,9 @@ namespace SAE1._01
         // Temps Ecoule Bonus
         private int tempsEcouleBonus = 0;
 
+        // Temps Ecoule Lettre Joueur
+        private int tempsEcouleLettreJoueur = 0;
+
         // Test difficulté arcade
         bool diffArcade = false;
 
@@ -281,11 +284,12 @@ namespace SAE1._01
         public void GestionTemps()
         {
             // Cacher lettre au dessus joueur
+            tempsEcouleLettreJoueur++;
             if (compteur % 40 == 0)
             {
                 lettreJoueur.Visibility = Visibility.Hidden;
+                tempsEcouleLettreJoueur = 0;
             }
-            compteur++;
 
             // Test temps ecoule son ennemi
             tempsEcouleSonEnnemi++;
@@ -302,6 +306,9 @@ namespace SAE1._01
             {
                 DisparitionBonus();
             }
+
+            // Compteur de rafraichissement
+            compteur++;
         }
         public void GestionEnnemi(Rectangle y)
         {
