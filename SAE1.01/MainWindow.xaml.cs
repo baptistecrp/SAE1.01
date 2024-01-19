@@ -88,7 +88,9 @@ namespace SAE1._01
 
         // Pour menu
         private bool jeuEstLance = false;
-        
+
+
+
         public MainWindow()
         {
             #if DEBUG
@@ -98,8 +100,8 @@ namespace SAE1._01
             // Application du curseur personnalisé sur le canvas
             myCanvas.Cursor = curseur;
             MenuPrincipale();
+            FenetrePrincipale.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./font/#pixelmix");
 
-            
             // Apparence du fond
             fond.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/fond.png")));
             // Configuration du timer
