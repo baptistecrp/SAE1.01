@@ -74,9 +74,6 @@ namespace SAE1._01
         private MediaPlayer sonJeu = new MediaPlayer();
 
 
-        // Temps Ecoule Son Ennemi
-        private int tempsEcouleSonEnnemi = 0;
-
         // Temps Ecoule Bonus
         private int tempsEcouleBonus = 0;
 
@@ -111,8 +108,8 @@ namespace SAE1._01
             // Lancement timer
             dispatcherTimer.Start();
             // Chargement son ennemi
-            sonEnnemi.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/test.wav"));
             sonJeu.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/musiqueFond.wav"));
+            sonJeu.Volume = 0.02;
             // Lancement sonJeu
             sonJeu.Play();
             // Gestion de l'événement MediaEnded pour la boucle de la musique de fond
@@ -191,8 +188,8 @@ namespace SAE1._01
                 {
                     elementASuppr.Add(y);
                     ennemiTuer = true;
+                    sonEnnemi.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/disparitionEnnemi.wav"));
                     sonEnnemi.Play();
-                    tempsEcouleSonEnnemi = 0;
                 }
             }
             if (!ennemiTuer && e.Key != Key.Escape)
@@ -292,15 +289,6 @@ namespace SAE1._01
                 tempsEcouleLettreJoueur = 0;
             }
 
-            // Test temps ecoule son ennemi
-            tempsEcouleSonEnnemi++;
-
-            if (tempsEcouleSonEnnemi == 10)
-            {
-                sonEnnemi.Stop();
-                tempsEcouleSonEnnemi = 0;
-            }
-
             // Test temps ecoule bonus
             tempsEcouleBonus++;
             if (tempsEcouleBonus % 45 == 0)
@@ -332,9 +320,10 @@ namespace SAE1._01
                     if (regexTagEnnemi.IsMatch((string)y.Name))
                     {
                         nbrVie--;
+                        nbrScore--;
                     }
                     elementASuppr.Add(y);
-                    nbrScore--;
+                    
                 }
             }
         }
@@ -441,7 +430,6 @@ namespace SAE1._01
             nbrScore = 0;
             nbrVie = 3;
             compteur = 0;
-            tempsEcouleSonEnnemi = 0;
             tempsEcouleBonus = 0;
             vitesseEnnemi = 0.5;
             vitesseAnim = 11;
