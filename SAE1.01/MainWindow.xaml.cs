@@ -221,6 +221,7 @@ namespace SAE1._01
         }
         private void Jeu(object sender, EventArgs e)
         {
+            Console.WriteLine("Temps Bonus " + tempsEcouleBonus);
             RedimensionFenetre();
             if (nbrVie <= 0)
                         {
@@ -282,7 +283,7 @@ namespace SAE1._01
             CreationEnnemi();
 
             // Creation bonus aléatoirement
-            if (compteur % random.Next(100,400) == 0)
+            if (tempsEcouleBonus >= random.Next(1250,3000))
             {
                 ApparitionBonus();
             }
@@ -360,7 +361,7 @@ namespace SAE1._01
 
             // Test temps ecoule bonus
             tempsEcouleBonus++;
-            if (tempsEcouleBonus == 90)
+            if (tempsEcouleBonus % 45 == 0)
             {
                 DisparitionBonus();
             }
