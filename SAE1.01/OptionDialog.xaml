@@ -1,14 +1,30 @@
-﻿<Window x:Class="SAE1._01.OptionDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SAE1._01"
-        mc:Ignorable="d"
-        Title="OptionDialog" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+﻿<Window
+    x:Class="SAE1._01.OptionDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SAE1._01"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="OptionDialog"
+    Width="800"
+    Height="450"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Grid>
-        <CheckBox Content="Pleine Écran" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,44,0,0" IsChecked="False" Checked="PleinEcran_Check"/>
-        <Button x:Name="quitterBouton" Content="Quitter" HorizontalAlignment="Center" Margin="0,387,0,0" VerticalAlignment="Top" Click="quitterBouton_Click"/>
+        <CheckBox
+            Margin="0,44,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Checked="PleinEcran_Check"
+            Content="Plein Écran"
+            IsChecked="False" />
+        <Button
+            x:Name="quitterBouton"
+            Margin="0,387,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Click="quitterBouton_Click"
+            Content="Quitter" />
 
     </Grid>
 </Window>
