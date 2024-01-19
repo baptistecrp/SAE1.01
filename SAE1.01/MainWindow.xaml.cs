@@ -205,6 +205,7 @@ namespace SAE1._01
                 {
                     lettreJoueur.Visibility = Visibility.Visible;
                     lettreJoueur.Fill = lettreImg[i];
+                    tempsEcouleLettreJoueur=0;
                 }
             }
             if (e.Key == Key.Escape)
@@ -285,7 +286,7 @@ namespace SAE1._01
         {
             // Cacher lettre au dessus joueur
             tempsEcouleLettreJoueur++;
-            if (compteur % 40 == 0)
+            if (tempsEcouleLettreJoueur == 20)
             {
                 lettreJoueur.Visibility = Visibility.Hidden;
                 tempsEcouleLettreJoueur = 0;
