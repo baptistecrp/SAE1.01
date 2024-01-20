@@ -29,6 +29,7 @@
             VerticalAlignment="Top"
             Click="quitterBouton_Click"
             Content="" MouseEnter="quitterBouton_MouseEnter" MouseLeave="quitterBouton_MouseLeave" />
+        <Slider x:Name="sliderSon" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Top" Width="120" IsDirectionReversed="True" SmallChange="1" Value="5"/>
 
     </Grid>
     <Window.Resources>

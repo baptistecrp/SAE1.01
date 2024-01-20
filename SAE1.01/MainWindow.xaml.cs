@@ -480,16 +480,18 @@ namespace SAE1._01
         {
             if (!myCanvas.Children.Contains(bonus))
             {
+                int valeurBonus = random.Next(1, 5);
+
                 bonus = new Rectangle
                 {
-                    Name = "bonus",
+                    Name = "bonus"+valeurBonus,
                     Height = 50 * multiplicateurY,
                     Width = 50 * multiplicateurX,
-                    Fill = lettreImg[1],
+                    Fill = lettreImg[valeurBonus] // à modifier quand image bonus finit
                 };
 
                 Canvas.SetTop(bonus, random.Next((int)bonus.Height, (int)Canvas.GetTop(lettreJoueur)-(int)bonus.Height));
-                Canvas.SetLeft(bonus, random.Next((int)bonus.Width, (int)largeurFenetre)-bonus.Width);
+                Canvas.SetLeft(bonus, random.Next((int)bonus.Width, (int)largeurFenetre) - bonus.Width);
 
                 myCanvas.Children.Add(bonus);
 
@@ -501,7 +503,29 @@ namespace SAE1._01
 
         public void clicBonus(object sender, MouseButtonEventArgs e)
         {
-            nbrScore += 100;
+            if (bonus.Name == "bonus1")
+            {
+                nbrScore += 25;
+            }
+            else if (bonus.Name == "bonus2")
+            {
+                nbrVie++;
+            }
+            else if (bonus.Name == "bonus3")
+            {
+                vitesseAnim /= 1.5;
+                vitesseEnnemi /= 1.5;
+            }
+            else if (bonus.Name == "bonus4")
+            {
+                foreach (var y in myCanvas.Children.OfType<Rectangle>())
+                {
+                    if (y is Rectangle && regexTagToutEnnemi.IsMatch(y.Name))
+                    {
+                        elementASuppr.Add(y);
+                    }
+                }
+            }
 
             // Disparition immédiate du bonus
             DisparitionBonus();
@@ -592,8 +616,6 @@ namespace SAE1._01
             if (!menuOptions.pleinEcran) { Fenetre(); }
             if (menuOptions.quitter && jeuEstLance) { MenuPause(); }
             if (menuOptions.quitter && !jeuEstLance) { MenuPrincipale(); }
-
-
         }
     }
 }
