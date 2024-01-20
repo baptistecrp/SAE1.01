@@ -25,7 +25,7 @@ namespace SAE1._01
         {
             InitializeComponent();
             quitterBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/quitterBouton/quitterBoutonNormal.png")));
-
+            Console.WriteLine(sliderSon.Value);
         }
 
         private void PleinEcran_Check(object sender, RoutedEventArgs e)
@@ -36,8 +36,7 @@ namespace SAE1._01
         private void quitterBouton_Click(object sender, RoutedEventArgs e)
         {
             quitter = true;
-            Close();
-            Console.WriteLine(pleinEcran);
+            Hide();
 
         }
 

@@ -92,6 +92,7 @@ namespace SAE1._01
 
         // Pour menu
         private bool jeuEstLance = false;
+        OptionDialog menuOptions = new OptionDialog();
 
 
 
@@ -131,6 +132,7 @@ namespace SAE1._01
         }
         private void Jeu(object sender, EventArgs e)
         {
+            Console.WriteLine(vitesseEnnemi);
             Console.WriteLine(diffArcade + " " + diffNormal+" " + diffDur);
             Console.WriteLine("Temps Bonus " + tempsEcouleBonus);
             CreationEnnemi();
@@ -245,7 +247,7 @@ namespace SAE1._01
                 // Placement aléatoire entre gauche et droite
                 Canvas.SetTop(lettre, Canvas.GetTop(joueur) - lettre.Height);
                 Canvas.SetTop(nouvelEnnemi, Canvas.GetTop(joueur));
-                int x = random.Next(0, 2) * (int)Application.Current.MainWindow.Width;
+                int x = random.Next(0, 2) * (int)FenetrePrincipale.Width;
                 // pour que les ennemis apparaissent en dehors de la fenetre
                 if (x == 0) { x -= (int)nouvelEnnemi.Width; }
                 // si un ennemi est à droite on change le nom pour les animations
@@ -266,12 +268,12 @@ namespace SAE1._01
                 else if (diffDur)
                 {
                     // Modification vitesse pour accélérer
-                    vitesseEnnemi += 0.15* multiplicateurX;
+                    vitesseEnnemi += 0.2* multiplicateurX;
                 }
                 // Modification vitesse animation
-                if ((diffNormal || diffDur ) && (11 - (vitesseEnnemi/multiplicateurX )* 0.5) > 1)
+                if ((11 - (vitesseEnnemi/multiplicateurX )* 0.8) > 1)
                 {
-                    vitesseAnim = 11 - vitesseEnnemi*0.5;
+                    vitesseAnim = 11 - vitesseEnnemi/multiplicateurX*0.8;
                 }
                 tempsEcouleEnnemi = 0;
                 #if DEBUG
@@ -461,8 +463,8 @@ namespace SAE1._01
         public void RedimensionFenetre()
         {
             // méthode pour redimensionner tout les éléments de la fenetre 
-            double largeurNouvelleFenetre = (int)Application.Current.MainWindow.Width;
-            double hauteurNouvelleFenetre = (int)Application.Current.MainWindow.Height;
+            double largeurNouvelleFenetre = FenetrePrincipale.Width;
+            double hauteurNouvelleFenetre = FenetrePrincipale.Height;
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
                 multiplicateurX = largeurFenetre/800;
@@ -568,12 +570,6 @@ namespace SAE1._01
             // Ouverture de la fenetre du menu
             MenuDialog menu = new MenuDialog();
             menu.ShowDialog();
-            if (menu.option)
-            {
-                MenuOptions();
-            }
-            else if (menu.DialogResult == false) { Application.Current.Shutdown(); }
-            else if (menu.DialogResult == true) { jeuEstLance = true; }
             // Test difficulté dur
             if (menu.durBool)
             {
@@ -596,6 +592,19 @@ namespace SAE1._01
                 diffNormal = true;
                 diffDur = false;
             }
+            else if (!menu.normalBool && !menu.normalBool && !menu.durBool)
+            {
+                diffArcade = false;
+                diffNormal = true;
+                diffDur = false;
+            }
+            if (menu.option)
+            {
+                MenuOptions();
+            }
+            else if (menu.DialogResult == false) { Application.Current.Shutdown(); }
+            else if (menu.DialogResult == true) { jeuEstLance = true; Show(); Relance(); }
+            Console.WriteLine(menu.arcadeBool + " " + menu.normalBool + " " + menu.durBool);
         }
         private void MenuPause()
         {
@@ -603,19 +612,28 @@ namespace SAE1._01
             dispatcherTimer.Stop();
             menuPause.ShowDialog();
             if (menuPause.reprendre) { dispatcherTimer.Start(); }
-            if (menuPause.quitter) { Application.Current.Shutdown(); }
+            if (menuPause.quitter) { Hide(); MenuPrincipale(); }
             if (menuPause.relancer) { Relance(); }
             if (menuPause.option) { MenuOptions(); }
         }
 
         private void MenuOptions()
         {
-            OptionDialog menuOptions = new OptionDialog();
             menuOptions.ShowDialog();
             if (menuOptions.pleinEcran) { PleinEcran(); }
             if (!menuOptions.pleinEcran) { Fenetre(); }
-            if (menuOptions.quitter && jeuEstLance) { MenuPause(); }
-            if (menuOptions.quitter && !jeuEstLance) { MenuPrincipale(); }
+            if (menuOptions.quitter && jeuEstLance) { MenuPause();}
+            if (menuOptions.quitter && !jeuEstLance) { MenuPrincipale();}
+        }
+
+
+        protected override void OnClosed(EventArgs e)
+        {
+            // méthode pour corriger que lorsque on ferme fenetre
+            // avec la petit croix l'application continue a tourner
+            base.OnClosed(e);
+
+            App.Current.Shutdown();
         }
     }
 }
