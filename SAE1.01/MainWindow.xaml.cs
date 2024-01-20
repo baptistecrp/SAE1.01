@@ -553,21 +553,24 @@ namespace SAE1._01
             // Test difficulté dur
             if (menu.durBool)
             {
+                diffArcade = false;
+                diffNormal = false;
                 diffDur = true;
             }
             // Test difficulté arcade
             else if (menu.arcadeBool)
             {
                 diffArcade = true;
+                diffNormal = false;
+                diffDur = false;
+
             }
             // Test difficulté normal
             else if (menu.normalBool)
             {
+                diffArcade = false;
                 diffNormal = true;
-            }
-            else
-            {
-                diffNormal = true;
+                diffDur = false;
             }
         }
         private void MenuPause()
