@@ -80,8 +80,15 @@ namespace SAE1._01
         // Temps Ecoule Lettre Joueur
         private int tempsEcouleLettreJoueur = 0;
 
+        // Temps pour gerer apparition ennemi
+        private int tempsEcouleEnnemi = 0;
+
+
         // Test difficulté arcade
         bool diffArcade = false;
+        bool diffNormal = false;
+        bool diffDur = false;
+
 
         // Pour menu
         private bool jeuEstLance = false;
@@ -124,6 +131,7 @@ namespace SAE1._01
         }
         private void Jeu(object sender, EventArgs e)
         {
+            Console.WriteLine(diffArcade + " " + diffNormal+" " + diffDur);
             Console.WriteLine("Temps Bonus " + tempsEcouleBonus);
             CreationEnnemi();
             RedimensionFenetre();
@@ -211,12 +219,12 @@ namespace SAE1._01
                 MenuPause();
                 
             }
-
         }
         private void CreationEnnemi()
         {
-            if (compteur % random.Next(30, 51) == 0)
+            if (tempsEcouleEnnemi % random.Next(20, 41) == 0)
             {
+                
                 // Creation de la lettre
                 int nbLettre = random.Next(0, 26);
                 Rectangle lettre = new Rectangle
@@ -250,20 +258,31 @@ namespace SAE1._01
                 myCanvas.Children.Add(lettre);
                 myCanvas.Children.Add(nouvelEnnemi);
 
-                if (diffArcade == false)
+                if (diffNormal)
                 {
                     // Modification vitesse pour accélérer
-                    vitesseEnnemi += 0.05;
-                    #if DEBUG
-                        Console.WriteLine("Vitesse Ennemi: " + vitesseEnnemi);
-                    #endif
-
-                    // Modification vitesse animation
-                    vitesseAnim *= 0.995;
-                    #if DEBUG
-                        Console.WriteLine("Vitesse Animation: " + vitesseAnim);
-                    #endif
+                    vitesseEnnemi += 0.075*multiplicateurX;
                 }
+                else if (diffDur)
+                {
+                    // Modification vitesse pour accélérer
+                    vitesseEnnemi += 0.15* multiplicateurX;
+                }
+                // Modification vitesse animation
+                if ((diffNormal || diffDur ) && (10 - (vitesseEnnemi/multiplicateurX )* 0.5) > 1)
+                {
+                    vitesseAnim = 10 - vitesseEnnemi*0.25;
+                }
+                tempsEcouleEnnemi = 0;
+                #if DEBUG
+                    Console.WriteLine("Vitesse Ennemi: " + vitesseEnnemi);
+                #endif
+
+                #if DEBUG
+                    Console.WriteLine("Vitesse Animation: " + vitesseAnim);
+                #endif
+                Console.WriteLine(vitesseEnnemi);
+
             }
         }
         private void DeplacementEnnemi(Rectangle ennemi)
@@ -296,6 +315,8 @@ namespace SAE1._01
             {
                 DisparitionBonus();
             }
+
+            tempsEcouleEnnemi++;
 
             // Compteur de rafraichissement
             compteur++;
@@ -446,7 +467,6 @@ namespace SAE1._01
             {
                 multiplicateurX = largeurFenetre/800;
                 multiplicateurY = hauteurFenetre/450;
-                Console.WriteLine(largeurFenetre+ " "+ hauteurFenetre);
                 y.Width = largeurNouvelleFenetre * (y.Width / largeurFenetre);
                 y.Height = hauteurNouvelleFenetre * (y.Height / hauteurFenetre);
                 Canvas.SetLeft(y, largeurNouvelleFenetre * (Canvas.GetLeft(y) / largeurFenetre));
@@ -507,16 +527,16 @@ namespace SAE1._01
 
         private void PleinEcran()
         {
-            FenetrePrincipale.WindowState = WindowState.Maximized;
             FenetrePrincipale.WindowStyle = WindowStyle.None;
+            FenetrePrincipale.WindowState = WindowState.Maximized;
             RedimensionFenetre();
         }
         private void Fenetre()
         {
             FenetrePrincipale.Width = 800;
             FenetrePrincipale.Height = 450;
-            FenetrePrincipale.WindowState = WindowState.Normal;
             FenetrePrincipale.WindowStyle = WindowStyle.SingleBorderWindow;
+            FenetrePrincipale.WindowState = WindowState.Normal;
             RedimensionFenetre();
         }
         private void MenuPrincipale()
@@ -531,15 +551,23 @@ namespace SAE1._01
             else if (menu.DialogResult == false) { Application.Current.Shutdown(); }
             else if (menu.DialogResult == true) { jeuEstLance = true; }
             // Test difficulté dur
-            if (menu.durBool == true)
+            if (menu.durBool)
             {
-                vitesseAnim /= 2.5;
-                vitesseEnnemi *= 2.5;
+                diffDur = true;
             }
             // Test difficulté arcade
-            else if (menu.arcadeBool == true)
+            else if (menu.arcadeBool)
             {
                 diffArcade = true;
+            }
+            // Test difficulté normal
+            else if (menu.normalBool)
+            {
+                diffNormal = true;
+            }
+            else
+            {
+                diffNormal = true;
             }
         }
         private void MenuPause()

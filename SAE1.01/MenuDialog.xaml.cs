@@ -97,7 +97,7 @@ namespace SAE1._01
             modeArcadeBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeArcadeBouton/modeArcadeBoutonClicker.png")));
             modeNormalBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeNormalBouton/modeNormalBoutonNormal.png")));
             modeDifficileBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/modeDifficileBouton/modeDifficileBoutonNormal.png")));
-            arcadeBool = true;
+            arcadeBool = true; ;
             normalBool = false;
             durBool = false;
             Console.WriteLine(arcadeBool + " " + normalBool + " " + durBool);
