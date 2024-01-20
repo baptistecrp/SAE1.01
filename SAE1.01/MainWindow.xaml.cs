@@ -118,7 +118,6 @@ namespace SAE1._01
             dispatcherTimer.Start();
             // Chargement son ennemi
             sonJeu.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/musiqueFond.wav"));
-            sonJeu.Volume = 0.02;
             // Lancement sonJeu
             sonJeu.Play();
             // Gestion de l'événement MediaEnded pour la boucle de la musique de fond
@@ -132,7 +131,7 @@ namespace SAE1._01
         }
         private void Jeu(object sender, EventArgs e)
         {
-            Console.WriteLine(vitesseEnnemi);
+            Console.WriteLine(largeurFenetre + " " + hauteurFenetre + " " + Application.Current.MainWindow.Width);
             Console.WriteLine(diffArcade + " " + diffNormal+" " + diffDur);
             Console.WriteLine("Temps Bonus " + tempsEcouleBonus);
             CreationEnnemi();
@@ -557,14 +556,7 @@ namespace SAE1._01
             FenetrePrincipale.WindowState = WindowState.Maximized;
             RedimensionFenetre();
         }
-        private void Fenetre()
-        {
-            FenetrePrincipale.Width = 800;
-            FenetrePrincipale.Height = 450;
-            FenetrePrincipale.WindowStyle = WindowStyle.SingleBorderWindow;
-            FenetrePrincipale.WindowState = WindowState.Normal;
-            RedimensionFenetre();
-        }
+
         private void MenuPrincipale()
         {
             // Ouverture de la fenetre du menu
@@ -621,9 +613,20 @@ namespace SAE1._01
         {
             menuOptions.ShowDialog();
             if (menuOptions.pleinEcran) { PleinEcran(); }
-            if (!menuOptions.pleinEcran) { Fenetre(); }
+            else {Fenetre(menuOptions.tailleFenetre.Text);}
             if (menuOptions.quitter && jeuEstLance) { MenuPause();}
             if (menuOptions.quitter && !jeuEstLance) { MenuPrincipale();}
+            sonJeu.Volume = menuOptions.sliderSonJeu.Value/10;
+            sonEnnemi.Volume = menuOptions.sliderSonEffet.Value / 10;
+        }
+
+        public void Fenetre(string dimension)
+        {
+            string[] tabTemp = dimension.Split(" ");
+            FenetrePrincipale.Width = double.Parse(tabTemp[0]);
+            FenetrePrincipale.Height = double.Parse(tabTemp[2]);
+            FenetrePrincipale.WindowStyle = WindowStyle.SingleBorderWindow;
+            FenetrePrincipale.WindowState = WindowState.Normal;
         }
 
 
