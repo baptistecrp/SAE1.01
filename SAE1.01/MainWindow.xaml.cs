@@ -269,9 +269,9 @@ namespace SAE1._01
                     vitesseEnnemi += 0.15* multiplicateurX;
                 }
                 // Modification vitesse animation
-                if ((diffNormal || diffDur ) && (10 - (vitesseEnnemi/multiplicateurX )* 0.5) > 1)
+                if ((diffNormal || diffDur ) && (11 - (vitesseEnnemi/multiplicateurX )* 0.5) > 1)
                 {
-                    vitesseAnim = 10 - vitesseEnnemi*0.25;
+                    vitesseAnim = 11 - vitesseEnnemi*0.5;
                 }
                 tempsEcouleEnnemi = 0;
                 #if DEBUG
