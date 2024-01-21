@@ -21,7 +21,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Click="reprendreBouton_Click"
-            Content="Reprendre" />
+            Content="" MouseEnter="reprendreBouton_MouseEnter" MouseLeave="reprendreBouton_MouseLeave" />
         <Button
             x:Name="quitterBouton"
             Margin="0,200,0,0"
@@ -36,7 +36,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Click="relancerBouton_Click"
-            Content="Relancer" Margin="0,50,0,0" />
+            Content="" Margin="0,50,0,0" MouseEnter="relancerBouton_MouseEnter" MouseLeave="relancerBouton_MouseLeave" />
         <Button
             x:Name="optionBouton"
             Margin="0,0,0,100"

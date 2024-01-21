@@ -29,6 +29,9 @@ namespace SAE1._01
             InitializeComponent();
             optionBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/optionBouton/optionBoutonNormal.png")));
             quitterBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/quitterBouton/quitterBoutonNormal.png")));
+            relancerBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/relancerBouton/relancerBoutonNormal.png")));
+            reprendreBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/reprendreBouton/reprendreBoutonNormal.png")));
+
         }
 
         private void relancerBouton_Click(object sender, RoutedEventArgs e)
@@ -73,6 +76,28 @@ namespace SAE1._01
         private void optionBouton_MouseLeave(object sender, MouseEventArgs e)
         {
             optionBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/optionBouton/optionBoutonNormal.png")));
+        }
+
+        private void relancerBouton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            relancerBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/relancerBouton/relancerBoutonClicker.png")));
+        }
+
+        private void relancerBouton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            relancerBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/relancerBouton/relancerBoutonNormal.png")));
+        }
+
+        private void reprendreBouton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            reprendreBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/reprendreBouton/reprendreBoutonClicker.png")));
+
+        }
+
+        private void reprendreBouton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            reprendreBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/reprendreBouton/reprendreBoutonNormal.png")));
+
         }
     }
 }

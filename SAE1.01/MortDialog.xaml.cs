@@ -15,34 +15,29 @@ using System.Windows.Shapes;
 namespace SAE1._01
 {
     /// <summary>
-    /// Logique d'interaction pour OptionDialog.xaml
+    /// Logique d'interaction pour MortDialog.xaml
     /// </summary>
-    public partial class OptionDialog : Window
+    public partial class MortDialog : Window
     {
-        public bool pleinEcran = false;
         public bool quitter = false;
-        public OptionDialog()
+        public bool relancer = false;
+        public MortDialog()
         {
             InitializeComponent();
-            quitterBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/quitterBouton/quitterBoutonNormal.png")));
             this.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./font/#pixelade");
+            relancerBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/relancerBouton/relancerBoutonNormal.png")));
+            quitterBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/quitterBouton/quitterBoutonNormal.png")));
         }
-
-        private void PleinEcran_Check(object sender, RoutedEventArgs e)
-        {
-            pleinEcran = true;
-        }
-
         private void quitterBouton_Click(object sender, RoutedEventArgs e)
         {
             quitter = true;
             Hide();
 
         }
-
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        private void relancerBouton_Click(object sender, RoutedEventArgs e)
         {
-            pleinEcran = false;
+            Close();
+            this.relancer = true;
         }
         private void quitterBouton_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -55,6 +50,17 @@ namespace SAE1._01
             quitterBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/quitterBouton/quitterBoutonNormal.png")));
 
         }
+        private void relancerBouton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            relancerBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/relancerBouton/relancerBoutonClicker.png")));
+        }
+
+        private void relancerBouton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            relancerBouton.Background = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/bouton/relancerBouton/relancerBoutonNormal.png")));
+        }
+
+
 
     }
 }

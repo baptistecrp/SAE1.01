@@ -33,13 +33,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="img\A.png">
+    <None Update="img\lettres\A.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\B.png">
+    <None Update="img\lettres\B.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="img\Background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bouton\relancerBouton\relancerBoutonClicker.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bouton\relancerBouton\relancerBoutonNormal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bouton\reprendreBouton\reprendreBoutonClicker.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bouton\reprendreBouton\reprendreBoutonNormal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="img\fond.png">
@@ -81,13 +93,13 @@
     <None Update="img\Bouton\quitterBouton\quitterBoutonNormal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\C.png">
+    <None Update="img\lettres\C.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\D.png">
+    <None Update="img\lettres\D.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\E.png">
+    <None Update="img\lettres\E.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="img\ennemiMarcheDroite\ennemiMarche1.png">
@@ -192,19 +204,7 @@
     <None Update="img\ennemiMort\ennemiMort8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\EnnemiTest.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="img\Explosion1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="img\Explosion2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="img\Explosion3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="img\F.png">
+    <None Update="img\lettres\F.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="img\flamme\flamme1.png">
@@ -252,19 +252,19 @@
     <None Update="img\flamme\flamme9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\G.png">
+    <None Update="img\lettres\G.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\H.png">
+    <None Update="img\lettres\H.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="img\solHerbe.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\I.png">
+    <None Update="img\lettres\I.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\J.png">
+    <None Update="img\lettres\J.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="img\joueurStatique\joueurStatique1.png">
@@ -273,10 +273,10 @@
     <None Update="img\joueurStatique\joueurStatique2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\K.png">
+    <None Update="img\lettres\K.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\L.png">
+    <None Update="img\lettres\L.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="img\lettreDisparition\lettreDisparition1.png">
@@ -297,46 +297,46 @@
     <None Update="img\lettreDisparition\lettreDisparition6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\M.png">
+    <None Update="img\lettres\M.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\N.png">
+    <None Update="img\lettres\N.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\O.png">
+    <None Update="img\lettres\O.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\P.png">
+    <None Update="img\lettres\P.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\Q.png">
+    <None Update="img\lettres\Q.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\R.png">
+    <None Update="img\lettres\R.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\S.png">
+    <None Update="img\lettres\S.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\T.png">
+    <None Update="img\lettres\T.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\U.png">
+    <None Update="img\lettres\U.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\V.png">
+    <None Update="img\lettres\V.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\W.png">
+    <None Update="img\lettres\W.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\X.png">
+    <None Update="img\lettres\X.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\Y.png">
+    <None Update="img\lettres\Y.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="img\Z.png">
+    <None Update="img\lettres\Z.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="son\disparitionEnnemi.wav">

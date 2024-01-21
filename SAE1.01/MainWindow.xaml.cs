@@ -107,7 +107,6 @@ namespace SAE1._01
             // Application du curseur personnalisé sur le canvas
             myCanvas.Cursor = curseur;
             FenetrePrincipale.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./font/#pixelade");
-            menuOptions.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./font/#pixelade");
             // Apparence du fond
             solHerbe.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/solHerbe.png")));
             fond.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/fond.png")));
@@ -125,7 +124,7 @@ namespace SAE1._01
             for (int i = 0; i < alpha.Length; i++)
             {
                 lettreImg[i] = new ImageBrush();
-                lettreImg[i].ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/" + alpha[i] + ".png"));
+                lettreImg[i].ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/lettres/" + alpha[i] + ".png"));
             }
             PleinEcran();
             MenuPrincipale();
@@ -147,6 +146,7 @@ namespace SAE1._01
             {
                 // Si plus de vie stop le jeu
                 dispatcherTimer.Stop();
+                MenuMort();
             }
 
             // Parcourt de tous les rectangles du canvas
@@ -527,7 +527,6 @@ namespace SAE1._01
             }
             else if (bonus.Name == "bonus3")
             {
-                vitesseAnim /= 1.5;
                 vitesseEnnemi /= 1.5;
             }
             else if (bonus.Name == "bonus4")
@@ -610,7 +609,7 @@ namespace SAE1._01
             dispatcherTimer.Stop();
             menuPause.ShowDialog();
             if (menuPause.reprendre) { dispatcherTimer.Start(); }
-            if (menuPause.quitter) { jeuEstLance = false;  Hide(); MenuPrincipale(); ;}
+            if (menuPause.quitter) { jeuEstLance = false;  Hide(); MenuPrincipale(); }
             if (menuPause.relancer) { Relance(); }
             if (menuPause.option) { MenuOptions(); }
         }
@@ -624,6 +623,13 @@ namespace SAE1._01
             else {Fenetre(menuOptions.tailleFenetre.Text);}
             if (menuOptions.quitter && jeuEstLance) { MenuPause(); }
             if (menuOptions.quitter && !jeuEstLance) { MenuPrincipale(); }
+        }
+        public void MenuMort()
+        {
+            MortDialog menuMort = new MortDialog();
+            menuMort.ShowDialog();
+            if (menuMort.relancer) { Relance(); }
+            if (menuMort.quitter) { jeuEstLance = false; Hide(); MenuPrincipale(); }
         }
 
         public void Fenetre(string dimension)
