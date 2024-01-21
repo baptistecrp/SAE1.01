@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -86,13 +87,13 @@ namespace SAE1._01
 
         // Test difficulté arcade
         bool diffArcade = false;
-        bool diffNormal = false;
+        bool diffNormal = true;
         bool diffDur = false;
 
 
         // Pour menu
         private bool jeuEstLance = false;
-        OptionDialog menuOptions = new OptionDialog();
+        private OptionDialog menuOptions = new OptionDialog();
 
 
 
@@ -102,22 +103,20 @@ namespace SAE1._01
                         Console.WriteLine("Debug version");
             #endif
             InitializeComponent();
+            Application.Current.MainWindow = this; // Obliger car la variable menuOptions deviens MainWindow quand on la cré au dessus
             // Application du curseur personnalisé sur le canvas
             myCanvas.Cursor = curseur;
-            MenuPrincipale();
-            FenetrePrincipale.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./font/#pixelmix");
-
+            FenetrePrincipale.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./font/#pixelade");
+            menuOptions.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), "./font/#pixelade");
             // Apparence du fond
             solHerbe.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/solHerbe.png")));
             fond.Fill = new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/fond.png")));
+
             // Configuration du timer
-            dispatcherTimer.Tick += Jeu;
-            // Rafraichissment chaque 16ms
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
-            // Lancement timer
-            dispatcherTimer.Start();
+            
             // Chargement son ennemi
             sonJeu.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/musiqueFond.wav"));
+            sonJeu.Volume = 0.2;
             // Lancement sonJeu
             sonJeu.Play();
             // Gestion de l'événement MediaEnded pour la boucle de la musique de fond
@@ -128,11 +127,17 @@ namespace SAE1._01
                 lettreImg[i] = new ImageBrush();
                 lettreImg[i].ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/" + alpha[i] + ".png"));
             }
+            PleinEcran();
+            MenuPrincipale();
+            
+            dispatcherTimer.Tick += Jeu;
+            // Rafraichissment chaque 16ms
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
+            // Lancement timer
+            dispatcherTimer.Start();
         }
         private void Jeu(object sender, EventArgs e)
         {
-            Console.WriteLine(largeurFenetre + " " + hauteurFenetre + " " + Application.Current.MainWindow.Width);
-            Console.WriteLine(diffArcade + " " + diffNormal+" " + diffDur);
             Console.WriteLine("Temps Bonus " + tempsEcouleBonus);
             CreationEnnemi();
             RedimensionFenetre();
@@ -177,7 +182,7 @@ namespace SAE1._01
             
             
             // Changement label score
-            score.Content = "Score: " + nbrScore;
+            score.Content = nbrScore;
 
             // Changement label vie
             vieRestante.Content = "Vie Restante: " + nbrVie;
@@ -223,9 +228,9 @@ namespace SAE1._01
         }
         private void CreationEnnemi()
         {
-            if (tempsEcouleEnnemi % random.Next(20, 41) == 0)
+            if (tempsEcouleEnnemi % random.Next(30,32) == 0)
             {
-                
+                Console.WriteLine("La La La La LaLaLavvv LaLaLaLaLaLa");
                 // Creation de la lettre
                 int nbLettre = random.Next(0, 26);
                 Rectangle lettre = new Rectangle
@@ -246,7 +251,7 @@ namespace SAE1._01
                 // Placement aléatoire entre gauche et droite
                 Canvas.SetTop(lettre, Canvas.GetTop(joueur) - lettre.Height);
                 Canvas.SetTop(nouvelEnnemi, Canvas.GetTop(joueur));
-                int x = random.Next(0, 2) * (int)FenetrePrincipale.Width;
+                int x = random.Next(0, 2) * (int)Application.Current.MainWindow.Width;
                 // pour que les ennemis apparaissent en dehors de la fenetre
                 if (x == 0) { x -= (int)nouvelEnnemi.Width; }
                 // si un ennemi est à droite on change le nom pour les animations
@@ -454,7 +459,11 @@ namespace SAE1._01
             nbrVie = 3;
             compteur = 0;
             tempsEcouleBonus = 0;
-            vitesseEnnemi = 0.5;
+            if (diffArcade)
+            {
+                vitesseEnnemi = 2.5;
+            }
+            else { vitesseEnnemi = 0.5; }
             vitesseAnim = 11;
             dispatcherTimer.Start();
             
@@ -462,8 +471,8 @@ namespace SAE1._01
         public void RedimensionFenetre()
         {
             // méthode pour redimensionner tout les éléments de la fenetre 
-            double largeurNouvelleFenetre = FenetrePrincipale.Width;
-            double hauteurNouvelleFenetre = FenetrePrincipale.Height;
+            double largeurNouvelleFenetre = Application.Current.MainWindow.Width;
+            double hauteurNouvelleFenetre = Application.Current.MainWindow.Height;
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
                 multiplicateurX = largeurFenetre/800;
@@ -474,6 +483,10 @@ namespace SAE1._01
                 Canvas.SetTop(y, hauteurNouvelleFenetre * (Canvas.GetTop(y) / hauteurFenetre));
             }
             vitesseEnnemi = largeurNouvelleFenetre * (vitesseEnnemi / largeurFenetre);
+            score.Height = hauteurNouvelleFenetre * (score.Height/ hauteurFenetre);
+            Canvas.SetLeft(score, (largeurFenetre / 2) - (score.ActualWidth / 2));
+            Canvas.SetTop(score, hauteurNouvelleFenetre * (Canvas.GetTop(score) / hauteurFenetre));
+            score.FontSize = score.Height;
             largeurFenetre = largeurNouvelleFenetre;
             hauteurFenetre = hauteurNouvelleFenetre;
         }
@@ -575,16 +588,9 @@ namespace SAE1._01
                 diffArcade = true;
                 diffNormal = false;
                 diffDur = false;
-
             }
             // Test difficulté normal
             else if (menu.normalBool)
-            {
-                diffArcade = false;
-                diffNormal = true;
-                diffDur = false;
-            }
-            else if (!menu.normalBool && !menu.normalBool && !menu.durBool)
             {
                 diffArcade = false;
                 diffNormal = true;
@@ -604,7 +610,7 @@ namespace SAE1._01
             dispatcherTimer.Stop();
             menuPause.ShowDialog();
             if (menuPause.reprendre) { dispatcherTimer.Start(); }
-            if (menuPause.quitter) { Hide(); MenuPrincipale(); }
+            if (menuPause.quitter) { jeuEstLance = false;  Hide(); MenuPrincipale(); ;}
             if (menuPause.relancer) { Relance(); }
             if (menuPause.option) { MenuOptions(); }
         }
@@ -612,31 +618,27 @@ namespace SAE1._01
         private void MenuOptions()
         {
             menuOptions.ShowDialog();
+            sonJeu.Volume = menuOptions.sliderSonJeu.Value / 10;
+            sonEnnemi.Volume = menuOptions.sliderSonEffet.Value / 10;
             if (menuOptions.pleinEcran) { PleinEcran(); }
             else {Fenetre(menuOptions.tailleFenetre.Text);}
-            if (menuOptions.quitter && jeuEstLance) { MenuPause();}
-            if (menuOptions.quitter && !jeuEstLance) { MenuPrincipale();}
-            sonJeu.Volume = menuOptions.sliderSonJeu.Value/10;
-            sonEnnemi.Volume = menuOptions.sliderSonEffet.Value / 10;
+            if (menuOptions.quitter && jeuEstLance) { MenuPause(); }
+            if (menuOptions.quitter && !jeuEstLance) { MenuPrincipale(); }
         }
 
         public void Fenetre(string dimension)
         {
             string[] tabTemp = dimension.Split(" ");
-            FenetrePrincipale.Width = double.Parse(tabTemp[0]);
-            FenetrePrincipale.Height = double.Parse(tabTemp[2]);
-            FenetrePrincipale.WindowStyle = WindowStyle.SingleBorderWindow;
-            FenetrePrincipale.WindowState = WindowState.Normal;
+            Application.Current.MainWindow.Width = double.Parse(tabTemp[0]);
+            Application.Current.MainWindow.Height = double.Parse(tabTemp[2]);
+            Application.Current.MainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
+            Application.Current.MainWindow.WindowState = WindowState.Normal;
         }
 
-
-        protected override void OnClosed(EventArgs e)
+        private void FenetrePrincipale_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // méthode pour corriger que lorsque on ferme fenetre
-            // avec la petit croix l'application continue a tourner
-            base.OnClosed(e);
-
-            App.Current.Shutdown();
+            // méthode pour tout fermer lorsque la fentere principale est fermer
+            Application.Current.Shutdown();
         }
     }
 }

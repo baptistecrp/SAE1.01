@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <None Remove="fond.png" />
-    <None Remove="font\pixelmix.ttf" />
+    <None Remove="font\PIXELADE.TTF" />
     <None Remove="icon.png" />
     <None Remove="img\astro_arrow.cur" />
     <None Remove="img\astro_link.cur" />
@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <Resource Include="fond.png" />
-    <Resource Include="font\pixelmix.ttf">
+    <Resource Include="font\PIXELADE.TTF">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="icon.png">

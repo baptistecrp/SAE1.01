@@ -19,8 +19,8 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Checked="PleinEcran_Check"
-            Content="Plein Écran"
-            IsChecked="False" Unchecked="CheckBox_Unchecked" />
+            Content="Plein écran"
+            IsChecked="True" Unchecked="CheckBox_Unchecked" Foreground="White" FontSize="20" />
         <Button
             x:Name="quitterBouton"
             Width="144" Height="48"
@@ -29,9 +29,9 @@
             VerticalAlignment="Top"
             Click="quitterBouton_Click"
             Content="" MouseEnter="quitterBouton_MouseEnter" MouseLeave="quitterBouton_MouseLeave" />
-        <Slider x:Name="sliderSonJeu" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Top" Width="120"  SmallChange="0.1" Value="5"/>
+        <Slider x:Name="sliderSonJeu" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Top" Width="120"  SmallChange="0.1" Value="2"/>
         <Slider x:Name="sliderSonEffet" HorizontalAlignment="Center" Margin="0,291,0,0" VerticalAlignment="Top" Width="120"  SmallChange="0.1" Value="5"/>
-        <ComboBox x:Name="tailleFenetre" HorizontalAlignment="Left" Margin="117,161,0,0" VerticalAlignment="Top" Width="120">
+        <ComboBox x:Name="tailleFenetre" FontSize="20" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem IsSelected="True" Content="800 x 450"></ComboBoxItem>
             <ComboBoxItem Content="960 x 540"></ComboBoxItem>
             <ComboBoxItem Content="1280 x 720"></ComboBoxItem>
