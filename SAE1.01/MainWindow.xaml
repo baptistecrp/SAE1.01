@@ -23,7 +23,7 @@
             Panel.ZIndex="1"
             FontWeight="Bold"
             Foreground="White" FontSize="32" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">
-            Vie Restante :
+            Vies Restantes :
         </Label>
         <Rectangle
             Name="joueur"
