@@ -209,7 +209,7 @@ namespace SAE1._01
             Regex regexEnnemi = new Regex("^ennemi"+@e.Key);
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
-                if (regexEnnemi.IsMatch((string)y.Name+e.Key))
+                if (regexEnnemi.IsMatch((string)y.Name))
                 {
                     elementASuppr.Add(y);
                     ennemiTuer = true;
