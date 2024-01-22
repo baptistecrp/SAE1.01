@@ -50,6 +50,7 @@ namespace SAE1._01
         private ImageBrush[] animEnnemiMort = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort3.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort4.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort5.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort6.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort7.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMort/ennemiMort8.png"))) };
         private ImageBrush[] animEnnemiMortDroite = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort3.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort4.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort5.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort6.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort7.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/ennemiMortDroite/ennemiMort8.png")))};
         private ImageBrush[] animJoueurStatique = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/joueurStatique/joueurStatique1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/joueurStatique/joueurStatique2.png"))) };
+        private ImageBrush[] animBonus = new ImageBrush[] { new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Bonus/bonus1.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Bonus/bonus2.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Bonus/bonus3.png"))), new ImageBrush(new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "img/Bonus/bonus4.png"))) };
 
         // Bonus
         private Rectangle bonus = new Rectangle();
@@ -76,7 +77,7 @@ namespace SAE1._01
 
 
         // Temps Ecoule Bonus
-        private int tempsEcouleBonus = 0;
+        private int tempsEcouleBonus = 1;
 
         // Temps Ecoule Lettre Joueur
         private int tempsEcouleLettreJoueur = 0;
@@ -115,7 +116,7 @@ namespace SAE1._01
             
             // Chargement son ennemi
             sonJeu.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/musiqueFond.wav"));
-            sonJeu.Volume = 0.2;
+            sonJeu.Volume = 0.1;
             // Lancement sonJeu
             sonJeu.Play();
             // Gestion de l'événement MediaEnded pour la boucle de la musique de fond
@@ -137,6 +138,7 @@ namespace SAE1._01
         }
         private void Jeu(object sender, EventArgs e)
         {
+            Console.WriteLine(compteur);
             Console.WriteLine("Temps Bonus " + tempsEcouleBonus);
             CreationEnnemi();
             RedimensionFenetre();
@@ -160,20 +162,13 @@ namespace SAE1._01
                 Animation(animLettreDisparition, y, "lettreSuppr", 2, false);
                 Animation(animJoueurStatique, y, "joueur", 10, true);
                 Animation(animFlamme, y, "flamme", 3, true);
+                Animation(animBonus, y, "bonus", 20, true);
+
 
                 GestionEnnemi(y);
-
-
-                
-
-                // Si le rectangle est un bonus
-                if (y is Rectangle && (string)y.Name == "bonus")
-                {
-                    y.Cursor = curseurClick;
-                }
             }
             // Creation bonus aléatoirement
-            if (tempsEcouleBonus >= random.Next(1250,3000))
+            if (tempsEcouleBonus %random.Next(750,1500)==0)
             {
                 ApparitionBonus();
             }
@@ -230,7 +225,6 @@ namespace SAE1._01
         {
             if (tempsEcouleEnnemi % random.Next(30,32) == 0)
             {
-                Console.WriteLine("La La La La LaLaLavvv LaLaLaLaLaLa");
                 // Creation de la lettre
                 int nbLettre = random.Next(0, 26);
                 Rectangle lettre = new Rectangle
@@ -317,7 +311,7 @@ namespace SAE1._01
 
             // Test temps ecoule bonus
             tempsEcouleBonus++;
-            if (tempsEcouleBonus % 45 == 0)
+            if (tempsEcouleBonus % 65 == 0)
             {
                 DisparitionBonus();
             }
@@ -458,10 +452,10 @@ namespace SAE1._01
             nbrScore = 0;
             nbrVie = 3;
             compteur = 0;
-            tempsEcouleBonus = 0;
+            tempsEcouleBonus = 1;
             if (diffArcade)
             {
-                vitesseEnnemi = 2.5;
+                vitesseEnnemi = 1.5*multiplicateurX;
             }
             else { vitesseEnnemi = 0.5; }
             vitesseAnim = 11;
@@ -499,19 +493,19 @@ namespace SAE1._01
                 bonus = new Rectangle
                 {
                     Name = "bonus"+valeurBonus,
-                    Height = 50 * multiplicateurY,
-                    Width = 50 * multiplicateurX,
-                    Fill = lettreImg[valeurBonus] // à modifier quand image bonus finit
+                    Tag = "bonus0",
+                    Height = 48 * multiplicateurY,
+                    Width = 48 * multiplicateurX,
                 };
 
                 Canvas.SetTop(bonus, random.Next((int)bonus.Height, (int)Canvas.GetTop(lettreJoueur)-(int)bonus.Height));
                 Canvas.SetLeft(bonus, random.Next((int)bonus.Width, (int)largeurFenetre) - bonus.Width);
 
                 myCanvas.Children.Add(bonus);
-
+                bonus.Cursor = curseurClick;
                 bonus.MouseLeftButtonDown += clicBonus;
 
-                tempsEcouleBonus = 0;
+                tempsEcouleBonus = 1;
             }
         }
 
@@ -519,7 +513,7 @@ namespace SAE1._01
         {
             if (bonus.Name == "bonus1")
             {
-                nbrScore += 25;
+                nbrScore += 15;
             }
             else if (bonus.Name == "bonus2")
             {
@@ -548,10 +542,10 @@ namespace SAE1._01
         private void DisparitionBonus()
         {
             // Suppression du bonus
-            if (bonus != null && myCanvas.Children.Contains(bonus))
+            if (myCanvas.Children.Contains(bonus))
             {
                 myCanvas.Children.Remove(bonus);
-                tempsEcouleBonus = 0;
+                tempsEcouleBonus = 1;
             }
         }
 
@@ -639,6 +633,7 @@ namespace SAE1._01
             Application.Current.MainWindow.Height = double.Parse(tabTemp[2]);
             Application.Current.MainWindow.WindowStyle = WindowStyle.SingleBorderWindow;
             Application.Current.MainWindow.WindowState = WindowState.Normal;
+            RedimensionFenetre();
         }
 
         private void FenetrePrincipale_Closing(object sender, System.ComponentModel.CancelEventArgs e)

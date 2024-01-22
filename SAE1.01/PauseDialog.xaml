@@ -5,11 +5,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SAE1._01"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="PauseDialog"
+    Title="Pause"
     Width="500"
     Height="500"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d" WindowStyle="None" Icon="/icon.png" ResizeMode="NoResize" ShowInTaskbar="False">
+    mc:Ignorable="d" WindowStyle="None" Icon="/icon.png" ResizeMode="NoResize" BorderBrush="Black" BorderThickness="5" ShowInTaskbar="True">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/fond.png" Stretch="UniformToFill"/>

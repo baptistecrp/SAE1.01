@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAE1._01"
         mc:Ignorable="d"
-        Title="MortDialog" Height="500" Width="500" WindowStyle="None" Icon="/icon.png" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Mort" Height="500" Width="500" WindowStyle="None" Icon="/icon.png" BorderBrush="Black" BorderThickness="5" ShowInTaskbar="True" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/fond.png" Stretch="UniformToFill"/>

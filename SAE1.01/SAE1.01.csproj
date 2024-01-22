@@ -33,6 +33,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="img\Bonus\bonus1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bonus\bonus2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bonus\bonus3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\Bonus\bonus4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="img\lettres\A.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
