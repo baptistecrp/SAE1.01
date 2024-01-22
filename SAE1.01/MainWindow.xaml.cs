@@ -151,8 +151,10 @@ namespace SAE1._01
         }
         private void Jeu(object sender, EventArgs e)
         {
-            Console.WriteLine(compteur);
-            Console.WriteLine("Temps Bonus " + tempsEcouleBonus);
+            #if DEBUG
+                Console.WriteLine("Compteur: " + compteur);
+                Console.WriteLine("Temps Bonus: " + tempsEcouleBonus);
+            #endif
             CreationEnnemi();
             RedimensionFenetre();
             GestionElementASupprimer();
@@ -298,7 +300,6 @@ namespace SAE1._01
                 #if DEBUG
                     Console.WriteLine("Vitesse Animation: " + vitesseAnim);
                 #endif
-                Console.WriteLine(vitesseEnnemi);
 
             }
         }
@@ -404,7 +405,6 @@ namespace SAE1._01
                     {
                         Canvas.SetTop(rectangleMort, Canvas.GetTop(y) - (rectangleMort.Height - y.Height));
                         Canvas.SetLeft(rectangleMort, Canvas.GetLeft(y) + (y.Width - rectangleMort.Width));
-                        Console.WriteLine(Canvas.GetLeft(y));
                     }
                     myCanvas.Children.Add(rectangleMort);
                 }
@@ -612,7 +612,6 @@ namespace SAE1._01
             }
             else if (menu.DialogResult == false) { Application.Current.Shutdown(); }
             else if (menu.DialogResult == true) { jeuEstLance = true; Show(); Relance(); }
-            Console.WriteLine(menu.arcadeBool + " " + menu.normalBool + " " + menu.durBool);
         }
         private void MenuPause()
         {
