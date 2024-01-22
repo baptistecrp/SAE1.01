@@ -78,7 +78,6 @@ namespace SAE1._01
             arcadeBool = false;
             normalBool = false;
             durBool = true;
-            Console.WriteLine(arcadeBool + " " + normalBool + " " + durBool);
         }
 
         private void modeNormalBouton_Click(object sender, RoutedEventArgs e)
@@ -89,7 +88,6 @@ namespace SAE1._01
             arcadeBool = false;
             normalBool = true;
             durBool = false;
-            Console.WriteLine(arcadeBool + " " + normalBool + " " + durBool);
         }
 
         private void modeArcadeBouton_Click(object sender, RoutedEventArgs e)
@@ -100,7 +98,6 @@ namespace SAE1._01
             arcadeBool = true; ;
             normalBool = false;
             durBool = false;
-            Console.WriteLine(arcadeBool + " " + normalBool + " " + durBool);
         }
 
         private void optionBouton_MouseEnter(object sender, MouseEventArgs e)
