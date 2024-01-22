@@ -38,10 +38,10 @@
             <ComboBoxItem Content="1600 x 900"></ComboBoxItem>
             <ComboBoxItem Content="1920 x 1080"></ComboBoxItem>
         </ComboBox>
-        <Label Content="Musique : " HorizontalAlignment="Left" Margin="84,241,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+        <Label Content="Musique : " HorizontalAlignment="Left" Margin="93,236,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25"/>
 
-        <Label Content="Effets sonnores : " HorizontalAlignment="Left" Margin="25,282,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
-        <Label Content="Taille en fenetré : " HorizontalAlignment="Left" Margin="20,112,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+        <Label Content="Effets sonnores : " HorizontalAlignment="Left" Margin="20,277,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25"/>
+        <Label Content="Taille en fenetré : " HorizontalAlignment="Left" Margin="14,107,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25"/>
     </Grid>
     <Window.Resources>
         <Style TargetType="Button">

@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:SAE1._01"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="FenetrePrincipale"
-    Title="MainWindow"
+    Title="Lettricide"
     Width="800"
     Height="450"
     FocusManager.FocusedElement="{Binding ElementName=myCanvas}"

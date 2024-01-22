@@ -23,6 +23,19 @@ namespace SAE1._01
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly double LARGEUR_FENETRE_ORIGINE = 800;
+        private static readonly double HAUTEUR_FENETRE_ORIGINE = 450;
+        private static readonly int TEMPS_MIN_APPARITION_BONUS = 750;
+        private static readonly int TEMPS_MAX_APPARITION_BONUS = 1500;
+        private static readonly int FAUSSE_TOUCHE_SCORE_MOINS = 2;
+        private static readonly int TEMPS_APPARITION_ENNEMI = 30;
+        private static readonly double VITESSE_ENNEMI_ARCADE = 1.5;
+        private static readonly double VITESSE_ENNEMI_NORMAL = 0.5;
+        private static readonly double ACCELERATION_ENNEMI_NORMAL = 0.075;
+        private static readonly double ACCELERATION_ENNEMI_DIFFICILE = 0.2;
+        private static readonly int VITESSE_ANIM_ORIGINE = 11;
+        private static readonly int TEMPS_LETTRE_JOUEUR = 20;
+        private static readonly int TEMPS_BONUS = 60;
         private double multiplicateurX = 1;
         private double multiplicateurY = 1;
         private double largeurFenetre = 800;
@@ -75,7 +88,7 @@ namespace SAE1._01
         // Son jeu
         private MediaPlayer sonJeu = new MediaPlayer();
 
-
+        private MediaPlayer sonBonus = new MediaPlayer();
         // Temps Ecoule Bonus
         private int tempsEcouleBonus = 1;
 
@@ -168,7 +181,7 @@ namespace SAE1._01
                 GestionEnnemi(y);
             }
             // Creation bonus aléatoirement
-            if (tempsEcouleBonus %random.Next(750,1500)==0)
+            if (tempsEcouleBonus %random.Next(TEMPS_MIN_APPARITION_BONUS,TEMPS_MAX_APPARITION_BONUS)==0)
             {
                 ApparitionBonus();
             }
@@ -200,11 +213,15 @@ namespace SAE1._01
                     ennemiTuer = true;
                     sonEnnemi.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/disparitionEnnemi.wav"));
                     sonEnnemi.Play();
+                    if (regexTagEnnemi.IsMatch(y.Name))
+                    {
+                        nbrScore++;
+                    }
                 }
             }
             if (!ennemiTuer && e.Key != Key.Escape)
             {
-                nbrScore -= 2;
+                nbrScore -= FAUSSE_TOUCHE_SCORE_MOINS;
             }
             for (int i = 0;i < alpha.Length;i++) 
             { 
@@ -223,7 +240,7 @@ namespace SAE1._01
         }
         private void CreationEnnemi()
         {
-            if (tempsEcouleEnnemi % random.Next(30,32) == 0)
+            if (tempsEcouleEnnemi % random.Next(TEMPS_APPARITION_ENNEMI,TEMPS_APPARITION_ENNEMI+2) == 0)
             {
                 // Creation de la lettre
                 int nbLettre = random.Next(0, 26);
@@ -261,17 +278,17 @@ namespace SAE1._01
                 if (diffNormal)
                 {
                     // Modification vitesse pour accélérer
-                    vitesseEnnemi += 0.075*multiplicateurX;
+                    vitesseEnnemi += ACCELERATION_ENNEMI_NORMAL*multiplicateurX;
                 }
                 else if (diffDur)
                 {
                     // Modification vitesse pour accélérer
-                    vitesseEnnemi += 0.2* multiplicateurX;
+                    vitesseEnnemi += ACCELERATION_ENNEMI_DIFFICILE* multiplicateurX;
                 }
                 // Modification vitesse animation
-                if ((11 - (vitesseEnnemi/multiplicateurX )* 0.8) > 1)
+                if ((VITESSE_ANIM_ORIGINE - (vitesseEnnemi/multiplicateurX )* 0.8) > 1)
                 {
-                    vitesseAnim = 11 - vitesseEnnemi/multiplicateurX*0.8;
+                    vitesseAnim = VITESSE_ANIM_ORIGINE - vitesseEnnemi/multiplicateurX*0.8;
                 }
                 tempsEcouleEnnemi = 0;
                 #if DEBUG
@@ -303,7 +320,7 @@ namespace SAE1._01
         {
             // Cacher lettre au dessus joueur
             tempsEcouleLettreJoueur++;
-            if (tempsEcouleLettreJoueur == 20)
+            if (tempsEcouleLettreJoueur == TEMPS_LETTRE_JOUEUR)
             {
                 lettreJoueur.Visibility = Visibility.Hidden;
                 tempsEcouleLettreJoueur = 0;
@@ -311,7 +328,7 @@ namespace SAE1._01
 
             // Test temps ecoule bonus
             tempsEcouleBonus++;
-            if (tempsEcouleBonus % 65 == 0)
+            if (tempsEcouleBonus % TEMPS_BONUS == 0)
             {
                 DisparitionBonus();
             }
@@ -342,7 +359,6 @@ namespace SAE1._01
                     if (regexTagEnnemi.IsMatch((string)y.Name))
                     {
                         nbrVie--;
-                        nbrScore--;
                     }
                     elementASuppr.Add(y);
                     
@@ -391,7 +407,6 @@ namespace SAE1._01
                         Console.WriteLine(Canvas.GetLeft(y));
                     }
                     myCanvas.Children.Add(rectangleMort);
-                    nbrScore++;
                 }
                 myCanvas.Children.Remove(y);
             }
@@ -455,10 +470,10 @@ namespace SAE1._01
             tempsEcouleBonus = 1;
             if (diffArcade)
             {
-                vitesseEnnemi = 1.5*multiplicateurX;
+                vitesseEnnemi = VITESSE_ENNEMI_ARCADE*multiplicateurX;
             }
-            else { vitesseEnnemi = 0.5; }
-            vitesseAnim = 11;
+            else { vitesseEnnemi = VITESSE_ENNEMI_NORMAL; }
+            vitesseAnim = VITESSE_ANIM_ORIGINE;
             dispatcherTimer.Start();
             
         }
@@ -469,8 +484,8 @@ namespace SAE1._01
             double hauteurNouvelleFenetre = Application.Current.MainWindow.Height;
             foreach (var y in myCanvas.Children.OfType<Rectangle>())
             {
-                multiplicateurX = largeurFenetre/800;
-                multiplicateurY = hauteurFenetre/450;
+                multiplicateurX = largeurFenetre/LARGEUR_FENETRE_ORIGINE;
+                multiplicateurY = hauteurFenetre/HAUTEUR_FENETRE_ORIGINE;
                 y.Width = largeurNouvelleFenetre * (y.Width / largeurFenetre);
                 y.Height = hauteurNouvelleFenetre * (y.Height / hauteurFenetre);
                 Canvas.SetLeft(y, largeurNouvelleFenetre * (Canvas.GetLeft(y) / largeurFenetre));
@@ -513,7 +528,7 @@ namespace SAE1._01
         {
             if (bonus.Name == "bonus1")
             {
-                nbrScore += 15;
+                nbrScore += random.Next(10,25);
             }
             else if (bonus.Name == "bonus2")
             {
@@ -533,6 +548,8 @@ namespace SAE1._01
                     }
                 }
             }
+            sonBonus.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "son/sonBonus.mp3"));
+            sonBonus.Play();
 
             // Disparition immédiate du bonus
             DisparitionBonus();
@@ -613,6 +630,7 @@ namespace SAE1._01
             menuOptions.ShowDialog();
             sonJeu.Volume = menuOptions.sliderSonJeu.Value / 10;
             sonEnnemi.Volume = menuOptions.sliderSonEffet.Value / 10;
+            sonBonus.Volume = menuOptions.sliderSonEffet.Value / 10;
             if (menuOptions.pleinEcran) { PleinEcran(); }
             else {Fenetre(menuOptions.tailleFenetre.Text);}
             if (menuOptions.quitter && jeuEstLance) { MenuPause(); }
