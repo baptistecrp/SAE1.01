@@ -193,7 +193,7 @@ namespace SAE1._01
             score.Content = nbrScore;
 
             // Changement label vie
-            vieRestante.Content = "Vie Restante: " + nbrVie;
+            vieRestante.Content = "Vies Restantes : " + nbrVie;
 
             
         }
